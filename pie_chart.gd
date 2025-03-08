@@ -23,7 +23,9 @@ func _draw():
 	var previousAngle : float = 0
 	var counter : int = 0
 	var valuesSize : int =Values.values().filter(func(number): return number > 0).size() 
-	var total : float = Values.values().reduce(func sum(accum, number): return accum + number)
+	var total : float = Values.values().reduce(func sum(accum, number): return accum + number, 0)
+	if !Values:
+		push_error("There are no values to display!")
 	for i in Values:
 		if Values[i] > 0.0:
 			#chosing color
