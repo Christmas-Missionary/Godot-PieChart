@@ -26,27 +26,29 @@ func _draw():
 	var total : float = Values.values().reduce(func sum(accum, number): return accum + number, 0)
 	if !Values:
 		push_error("There are no values to display!")
+	elif total == 0:
+		push_error("All the values total zero!")
 	for i in Values:
-		if Values[i] > 0.0:
-			#chosing color
-			var color : Color =  Color.from_hsv(1.0/(valuesSize+1) * counter/2 if counter%2 == 0 else 1.0/(valuesSize+1) * (valuesSize  - counter/2) ,0.6 if counter%4<2 else 0.8 ,0.9)
-			counter += 1
-			#drawing on the screen
-			var percentage: float = Values[i]/(total/100)
-			var currentAngle:float = 360 * (percentage/100)
-			var angle := deg_to_rad(currentAngle + previousAngle)
-			var anglePoint : Vector2 =  Vector2( cos(angle - deg_to_rad(currentAngle/2)), sin(angle - deg_to_rad(currentAngle/2) ) ) * radius
-			var label = Label.new()
-			label.text = i + "\n" + str(snappedf(percentage,0.01)).pad_decimals(2) + "%"
-			label.vertical_alignment = 1
-			label.horizontal_alignment = 1
-			$Labels.add_child(label)
-			label.position =  center - label.size/2 + anglePoint  * 1.5
-			draw_line(anglePoint * 1.05 +center, anglePoint * 1.2 + center,Color.WHITE, 2, true)
-			draw_circle_arc_poly( center, radius,previousAngle ,previousAngle + currentAngle , color)
-			if SeparationLines:
-				draw_line(center, center +Vector2(cos(angle), sin(angle)) * radius, Color.WHITE, 2, true)
-			previousAngle += currentAngle
+		assert(Values[i] >= 0.0, "Individual value must be at least zero!")
+		#chosing color
+		var color : Color =  Color.from_hsv(1.0/(valuesSize+1) * counter/2 if counter%2 == 0 else 1.0/(valuesSize+1) * (valuesSize  - counter/2) ,0.6 if counter%4<2 else 0.8 ,0.9)
+		counter += 1
+		#drawing on the screen
+		var percentage: float = Values[i]/(total/100)
+		var currentAngle:float = 360 * (percentage/100)
+		var angle := deg_to_rad(currentAngle + previousAngle)
+		var anglePoint : Vector2 =  Vector2( cos(angle - deg_to_rad(currentAngle/2)), sin(angle - deg_to_rad(currentAngle/2) ) ) * radius
+		var label = Label.new()
+		label.text = i + "\n" + str(snappedf(percentage,0.01)).pad_decimals(2) + "%"
+		label.vertical_alignment = 1
+		label.horizontal_alignment = 1
+		$Labels.add_child(label)
+		label.position =  center - label.size/2 + anglePoint  * 1.5
+		draw_line(anglePoint * 1.05 +center, anglePoint * 1.2 + center,Color.WHITE, 2, true)
+		draw_circle_arc_poly( center, radius,previousAngle ,previousAngle + currentAngle , color)
+		if SeparationLines:
+			draw_line(center, center +Vector2(cos(angle), sin(angle)) * radius, Color.WHITE, 2, true)
+		previousAngle += currentAngle
 	var titleLabel := $TitleLabel
 	if CenterCircle:
 		titleLabel.visible = true
