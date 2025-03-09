@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pie and a Fork"
-run/main_scene="res://pie_chart.tscn"
+run/main_scene="uid://ymtvpogfj0ce"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
