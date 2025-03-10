@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://brfh87432e853"]
+
+[node name="EntryLabel" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
