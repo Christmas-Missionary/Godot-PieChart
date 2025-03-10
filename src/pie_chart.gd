@@ -1,4 +1,5 @@
 extends Control
+class_name PieChart
 
 # A key is the name of the entry, while a value is the weight on the chart
 @export var entries: Array[PieChartEntry]
