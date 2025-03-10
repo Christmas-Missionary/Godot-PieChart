@@ -37,6 +37,7 @@ func _weight_sum(arr: Array[PieChartEntry]) -> float:
 	return res
 
 func _draw():
+	const LABEL: PackedScene = preload("res://src/entry_label.tscn")
 	var labels: Node = $Labels
 	for node: Node in labels.get_children():
 		node.queue_free()
@@ -55,11 +56,9 @@ func _draw():
 		var current_angle: float = percentage * 3.60
 		var angle: float = deg_to_rad(current_angle + previous_angle)
 		var angle_point: Vector2 = Vector2.from_angle(angle - deg_to_rad(current_angle / 2)) * radius
-		var label: Label = Label.new()
+		var label: = LABEL.instantiate() as Label
 		labels.add_child(label)
 		label.text = "%s\n%.2f%%" % [entry.name, percentage]
-		label.vertical_alignment = VerticalAlignment.VERTICAL_ALIGNMENT_CENTER
-		label.horizontal_alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER
 		label.position = (angle_point * 1.5) + center - (label.size / 2)
 		draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
 		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color)

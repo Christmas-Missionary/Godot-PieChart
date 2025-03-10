@@ -1,29 +1,27 @@
 extends Control
 
 @onready var _subject: = $Subject as PieChart
+@onready var _labels: Node = $Subject/Labels
 
 var _entries: Array[PieChartEntry] = [
-	PieChartEntry.new("Dogs", 25.0, Color.BROWN),
-	PieChartEntry.new("Cats", 75.0, Color.CORNSILK)
+	PieChartEntry.new("Dogs", 0.0, Color.BROWN),
+	PieChartEntry.new("Cats", 100.0, Color.CORNSILK)
 ]
-
-var _is_zero_increasing: bool = true
 
 func _ready() -> void:
 	_subject.entries = _entries
 
-const _RATE: float = 0.5
+const _RATE: float = 0.1
 
 func _physics_process(_delta) -> void:
-	if _is_zero_increasing:
-		_entries[0].weight += _RATE
-		_entries[1].weight -= _RATE
-	else:
-		_entries[0].weight -= _RATE
-		_entries[1].weight += _RATE
-		
-	if is_equal_approx(_entries[0].weight, 1.0):
-		_is_zero_increasing = true
-	elif is_equal_approx(_entries[1].weight, 1.0):
-		_is_zero_increasing = false
+	_entries[0].weight += _RATE
+	_entries[1].weight -= _RATE
 	_subject.entries = _entries
+	for label: Node in _labels.get_children():
+		var _rect: = ColorRect.new()
+		add_child(_rect)
+		_rect.global_position = (label as Control).position + (_subject.size / 2)
+		_rect.size = Vector2.ONE
+	if is_zero_approx(_entries[1].weight):
+		_subject.entries = []
+		set_physics_process(false)
