@@ -2,10 +2,25 @@ extends Control
 class_name PieChart
 
 # A key is the name of the entry, while a value is the weight on the chart
-@export var entries: Array[PieChartEntry]
-@export var title: String
-@export var show_title: bool = true
-@export var show_separation: bool = false
+@export var entries: Array[PieChartEntry]:
+	set(val):
+		entries = val
+		queue_redraw()
+
+@export var title: String:
+	set(val):
+		title = val
+		queue_redraw()
+
+@export var show_title: bool = true:
+	set(val):
+		show_title = val
+		queue_redraw()
+
+@export var show_separation: bool = false:
+	set(val):
+		show_separation = val
+		queue_redraw()
 
 # find number of points/sides needed for perfect circle, and optimize
 func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color):
