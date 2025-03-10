@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=3 uid="uid://dtgthje8riqy2"]
+
+[ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="1_1t0cm"]
+[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="2_p0exr"]
+
+[sub_resource type="Resource" id="Resource_ljaqu"]
+script = ExtResource("2_p0exr")
+name = "Test"
+weight = 55.0
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_mm752"]
+script = ExtResource("2_p0exr")
+name = "Exam"
+weight = 30.0
+color = Color(0, 0, 1, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_p0exr"]
+script = ExtResource("2_p0exr")
+name = "Orange"
+weight = 1.0
+color = Color(1, 0.501961, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_1mt0t"]
+script = ExtResource("2_p0exr")
+name = "*No Answer*"
+weight = 14.0
+color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Animation" id="Animation_1t0cm"]
+resource_name = "Move"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Subject:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(400, 0), Vector2(200, 300), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Subject:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3.99549),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -3.14159, 6.28319, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_p0exr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Subject:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Subject:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p0exr"]
+_data = {
+&"Move": SubResource("Animation_1t0cm"),
+&"RESET": SubResource("Animation_p0exr")
+}
+
+[node name="MovingPie" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Subject" parent="." instance=ExtResource("1_1t0cm")]
+layout_mode = 1
+offset_right = -652.0
+offset_bottom = -148.0
+pivot_offset = Vector2(250, 250)
+entries = Array[ExtResource("2_p0exr")]([SubResource("Resource_ljaqu"), SubResource("Resource_mm752"), SubResource("Resource_p0exr"), SubResource("Resource_1mt0t")])
+title = "Test or Exam?"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p0exr")
+}
+autoplay = "Move"
