@@ -41,9 +41,9 @@ func _draw():
 	var labels: Node = $Labels
 	var size_of_entries: int = entries.size()
 	if size_of_entries < labels.get_child_count():
-		for i in size_of_entries:
+		for i in (labels.get_child_count() - size_of_entries):
 			labels.get_children()[i].queue_free()
-	if size_of_entries > labels.get_child_count():
+	elif size_of_entries > labels.get_child_count():
 		for _i in (size_of_entries - labels.get_child_count()):
 			labels.add_child(LABEL.instantiate())
 	var total: float = _weight_sum(entries)
@@ -54,6 +54,7 @@ func _draw():
 	var center: Vector2 = size / 2
 	var radius: float = minf(size.x, size.y) / 4
 	var previous_angle: float = 0
+	var all_labels: = labels.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
 	for i: int in size_of_entries:
 		var entry: PieChartEntry = entries[i]
 		assert(entry.weight >= 0.0, "Individual value must be at least zero!")
@@ -62,7 +63,7 @@ func _draw():
 		var current_angle: float = percentage * 3.60
 		var angle: float = deg_to_rad(current_angle + previous_angle)
 		var angle_point: Vector2 = Vector2.from_angle(angle - deg_to_rad(current_angle / 2)) * radius
-		var label: = labels.get_children()[i] as Label
+		var label: = all_labels[i] as Label
 		label.text = "%s\n%.2f%%" % [entry.name, percentage]
 		label.position = (angle_point * 1.5) + center - (label.size / 2)
 		draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
