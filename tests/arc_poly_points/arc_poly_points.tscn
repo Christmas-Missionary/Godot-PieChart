@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://del6vv780l1p8"]
+
+[ext_resource type="Script" uid="uid://c6reeon8ci52" path="res://tests/arc_poly_points/arc_poly_points.gd" id="1_hh44e"]
+[ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="2_aphas"]
+
+[node name="ArcPolyPoints" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hh44e")
+
+[node name="PieChart" parent="." instance=ExtResource("2_aphas")]
+visible = false
+layout_mode = 1
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.25
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 733.0
+offset_top = 344.0
+offset_right = 775.0
+offset_bottom = 367.0
+scale = Vector2(10, 10)
+text = "3"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 600.0
+offset_right = 1119.0
+offset_bottom = 643.0
+min_value = 3.0
+max_value = 128.0
+value = 3.0
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]

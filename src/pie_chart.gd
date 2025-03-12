@@ -23,11 +23,10 @@ class_name PieChart
 		queue_redraw()
 
 # find number of points/sides needed for perfect circle, and optimize
-func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color):
-	const nb_points: int = 32
+func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color, number_of_points: int):
 	var points_arc: PackedVector2Array = [center]
-	for i: int in (nb_points + 1):
-		points_arc.push_back(Vector2.from_angle(deg_to_rad((((angle_to - angle_from) * i) / nb_points) + angle_from)) * radius + center)
+	for i: int in (number_of_points + 1):
+		points_arc.push_back(Vector2.from_angle(deg_to_rad((((angle_to - angle_from) * i) / number_of_points) + angle_from)) * radius + center)
 	draw_colored_polygon(points_arc, color)
 
 func _weight_sum(arr: Array[PieChartEntry]) -> float:
@@ -67,7 +66,7 @@ func _draw():
 		label.text = "%s\n%.2f%%" % [entry.name, percentage]
 		label.position = (angle_point * 1.5) + center - (label.size / 2)
 		draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
-		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color)
+		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, 32)
 		if show_separation:
 			draw_line(center, Vector2.from_angle(angle) * radius + center, Color.WHITE, 2, true)
 		previous_angle += current_angle
