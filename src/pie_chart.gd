@@ -6,6 +6,9 @@ class_name PieChart
 	set(val):
 		entries = val
 		queue_redraw()
+	get():
+		queue_redraw()
+		return entries
 
 @export var title: String:
 	set(val):
