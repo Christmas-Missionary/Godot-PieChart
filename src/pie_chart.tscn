@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbux5geqj1s7n"]
+[gd_scene load_steps=2 format=3 uid="uid://cbux5geqj1s7n"]
 
 [ext_resource type="Script" uid="uid://biulhvvte3dvh" path="res://src/pie_chart.gd" id="1_4kfxg"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_oeq2n"]
-font_color = Color(0, 0, 0, 1)
 
 [node name="PieChart" type="Control"]
 layout_mode = 3
@@ -14,14 +11,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4kfxg")
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-label_settings = SubResource("LabelSettings_oeq2n")
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 3
-clip_text = true
 
 [node name="Labels" type="Control" parent="."]
 layout_mode = 1
