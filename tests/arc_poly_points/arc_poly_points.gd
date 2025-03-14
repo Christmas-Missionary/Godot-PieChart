@@ -6,7 +6,7 @@ var _points: int = 3
 
 @onready var _label: = $Label as Label
 
-func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color, number_of_points: int):
+func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color, number_of_points: int) -> void:
 	var points_arc: PackedVector2Array = [center]
 	for i: int in (number_of_points + 1):
 		points_arc.push_back(Vector2.from_angle(deg_to_rad((((angle_to - angle_from) * i) / number_of_points) + angle_from)) * radius + center)

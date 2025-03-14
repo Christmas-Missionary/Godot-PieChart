@@ -23,7 +23,7 @@ class_name PieChart
 		queue_redraw()
 
 # find number of points/sides needed for perfect circle
-func draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int):
+func draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
 	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
 	var rads_to_rotate: float = (rads_to - rads_from) / number_of_points
 	var points_arc: PackedVector2Array
@@ -41,7 +41,7 @@ func _weight_sum(arr: Array[PieChartEntry]) -> float:
 		res += elem.weight
 	return res
 
-func _draw():
+func _draw() -> void:
 	const LABEL: PackedScene = preload("res://src/entry_label.tscn")
 	var labels: Node = $Labels
 	var size_of_entries: int = entries.size()
