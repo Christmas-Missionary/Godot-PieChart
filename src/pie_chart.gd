@@ -60,6 +60,7 @@ func _draw() -> void:
 	var radius: float = minf(size.x, size.y) / 4
 	var previous_angle: float = 0
 	var all_labels: = labels.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
+	var number_of_points: int = ceili(64.0 / size_of_entries)
 	for i: int in size_of_entries:
 		var entry: PieChartEntry = entries[i]
 		assert(entry.weight >= 0.0, "Individual value must be at least zero!")
@@ -72,7 +73,7 @@ func _draw() -> void:
 		label.text = "%s\n%.2f%%" % [entry.name, percentage]
 		label.position = (angle_point * 1.5) + center - (label.size / 2)
 		draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
-		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, 32)
+		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, number_of_points)
 		if show_separation:
 			draw_line(center, Vector2.from_angle(angle) * radius + center, Color.WHITE, 2, true)
 		previous_angle += current_angle
