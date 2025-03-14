@@ -20,6 +20,11 @@ class_name PieChart
 		show_title = val
 		queue_redraw()
 
+@export var title_bbcode_enabled: bool = false:
+	set(val):
+		title_bbcode_enabled = val
+		($TitleLabel as RichTextLabel).bbcode_enabled = val
+
 @export var show_separation: bool = false:
 	set(val):
 		show_separation = val
@@ -80,7 +85,7 @@ func _draw() -> void:
 		if show_separation:
 			draw_line(center, Vector2.from_angle(angle) * radius + center, Color.WHITE, 2, true)
 		previous_angle += current_angle
-	var title_label: = $TitleLabel as Label
+	var title_label: = $TitleLabel as RichTextLabel
 	title_label.visible = show_title
 	if show_title:
 		draw_circle(center, radius * 0.60, Color.WHITE)
