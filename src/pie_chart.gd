@@ -26,7 +26,7 @@ class_name PieChart
 func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color, number_of_points: int):
 	var points_arc: PackedVector2Array = [center]
 	for i: int in (number_of_points + 1):
-		points_arc.push_back(Vector2.from_angle(deg_to_rad((((angle_to - angle_from) * i) / number_of_points) + angle_from)) * radius + center)
+		points_arc.push_back(Vector2.from_angle((((angle_to - angle_from) * i) / number_of_points) + angle_from) * radius + center)
 	draw_colored_polygon(points_arc, color)
 
 func _weight_sum(arr: Array[PieChartEntry]) -> float:
@@ -59,9 +59,9 @@ func _draw():
 		assert(entry.weight >= 0.0, "Individual value must be at least zero!")
 		# Drawing on the screen
 		var percentage: float = entry.weight / (total * 0.01)
-		var current_angle: float = percentage * 3.60
-		var angle: float = deg_to_rad(current_angle + previous_angle)
-		var angle_point: Vector2 = Vector2.from_angle(angle - deg_to_rad(current_angle / 2)) * radius
+		var current_angle: float = percentage * 0.0628318530717959 # (TAU * 0.01)
+		var angle: float = current_angle + previous_angle
+		var angle_point: Vector2 = Vector2.from_angle(angle - (current_angle / 2)) * radius
 		var label: = all_labels[i] as Label
 		label.text = "%s\n%.2f%%" % [entry.name, percentage]
 		label.position = (angle_point * 1.5) + center - (label.size / 2)
