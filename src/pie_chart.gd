@@ -22,11 +22,17 @@ class_name PieChart
 		show_separation = val
 		queue_redraw()
 
-# find number of points/sides needed for perfect circle, and optimize
-func draw_circle_arc_poly(center: Vector2, radius: float, angle_from: float, angle_to: float, color: Color, number_of_points: int):
-	var points_arc: PackedVector2Array = [center]
-	for i: int in (number_of_points + 1):
-		points_arc.push_back(Vector2.from_angle((((angle_to - angle_from) * i) / number_of_points) + angle_from) * radius + center)
+# find number of points/sides needed for perfect circle
+func draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int):
+	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
+	var rads_to_rotate: float = (rads_to - rads_from) / number_of_points
+	var points_arc: PackedVector2Array
+	points_arc.resize(number_of_points + 2)
+	points_arc[0] = center
+	points_arc[1] = previous_vec + center
+	for i: int in range(2, number_of_points + 2):
+		previous_vec = previous_vec.rotated(rads_to_rotate)
+		points_arc[i] = previous_vec + center
 	draw_colored_polygon(points_arc, color)
 
 func _weight_sum(arr: Array[PieChartEntry]) -> float:
