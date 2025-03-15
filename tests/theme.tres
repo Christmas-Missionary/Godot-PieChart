@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://durdnexxu27mc"]
+
+[sub_resource type="SystemFont" id="SystemFont_4kfxg"]
+subpixel_positioning = 0
+
+[resource]
+RichTextLabel/colors/default_color = Color(0, 0, 0.282353, 1)
+RichTextLabel/fonts/normal_font = SubResource("SystemFont_4kfxg")

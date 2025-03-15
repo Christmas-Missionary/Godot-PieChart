@@ -14,6 +14,8 @@ script = ExtResource("1_4kfxg")
 [node name="TitleLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
+offset_right = 1.0
+offset_bottom = 23.0
 horizontal_alignment = 1
 vertical_alignment = 1
 
