@@ -9,19 +9,19 @@ var _entries: Array[PieChartEntry] = [
 ]
 
 func _ready() -> void:
-	_subject.entries = _entries
+	_subject.entries_array = _entries
 
 const _RATE: float = 0.1
 
 func _physics_process(_delta) -> void:
 	_entries[0].weight += _RATE
 	_entries[1].weight -= _RATE
-	_subject.entries = _entries
+	_subject.entries_array = _entries
 	for label: Node in _labels.get_children():
 		var _rect: = ColorRect.new()
 		add_child(_rect)
 		_rect.global_position = (label as Control).position + (_subject.size / 2)
 		_rect.size = Vector2.ONE
 	if is_zero_approx(_entries[1].weight):
-		_subject.entries = []
+		_subject.entries_array = []
 		set_physics_process(false)

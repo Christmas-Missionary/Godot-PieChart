@@ -1,33 +1,98 @@
 extends Control
 class_name PieChart
+enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 
-# A key is the name of the entry, while a value is the weight on the chart
-@export var entries: Array[PieChartEntry]:
+@export_group("entry", "entries_")
+@export var entries_mode: ENTRY_MODE:
 	set(val):
-		entries = val
+		entries_mode = val
+		queue_redraw()
+
+@export var entries_array: Array[PieChartEntry]:
+	set(val):
+		entries_array = val
 		queue_redraw()
 	get():
 		queue_redraw()
-		return entries
+		return entries_array
 
-@export var title: String:
+@export var entries_pack: EntryPack:
 	set(val):
-		title = val
+		entries_pack = val
+		queue_redraw()
+	get():
+		queue_redraw()
+		return entries_pack
+
+@export var entries_quick_values: EntryQuickPack:
+	set(val):
+		entries_quick_values = val
+		queue_redraw()
+	get():
+		queue_redraw()
+		return entries_quick_values
+
+@export_group("title", "title_")
+@export var title_text: String:
+	set(val):
+		title_text = val
 		queue_redraw()
 
-@export var show_title: bool = true:
+@export var title_circle_color: Color:
 	set(val):
-		show_title = val
+		title_circle_color = val
 		queue_redraw()
 
-@export var title_bbcode_enabled: bool = false:
+@export var title_circle_radius: float:
+	set(val):
+		title_circle_radius = val
+		queue_redraw()
+
+@export var title_show: bool = true:
+	set(val):
+		title_show = val
+		queue_redraw()
+
+@export var title_bbcode_enabled: bool:
 	set(val):
 		title_bbcode_enabled = val
 		($TitleLabel as RichTextLabel).bbcode_enabled = val
 
-@export var show_separation: bool = false:
+@export_group("label", "label_")
+@export var label_show_name: bool = true:
 	set(val):
-		show_separation = val
+		label_show_name = val
+		queue_redraw()
+
+@export var label_show_weights: bool = true:
+	set(val):
+		label_show_name = val
+		queue_redraw()
+
+@export var label_show_percentage: bool = true:
+	set(val):
+		label_show_name = val
+		queue_redraw()
+
+@export var label_is_in_slice: bool:
+	set(val):
+		label_show_name = val
+		queue_redraw()
+
+@export_group("separation", "separation_")
+@export var separation_show: bool:
+	set(val):
+		separation_show = val
+		queue_redraw()
+
+@export var separation_color: Color:
+	set(val):
+		separation_color = val
+		queue_redraw()
+
+@export var separation_thickness: float:
+	set(val):
+		separation_thickness = val
 		queue_redraw()
 
 # find number of points/sides needed for perfect circle
@@ -52,15 +117,15 @@ func _weight_sum(arr: Array[PieChartEntry]) -> float:
 func _draw() -> void:
 	const LABEL: PackedScene = preload("res://src/entry_label.tscn")
 	var labels: Node = $Labels
-	var size_of_entries: int = entries.size()
+	var size_of_entries: int = entries_array.size()
 	if size_of_entries < labels.get_child_count():
 		for i in (labels.get_child_count() - size_of_entries):
 			labels.get_children()[i].queue_free()
 	elif size_of_entries > labels.get_child_count():
 		for _i in (size_of_entries - labels.get_child_count()):
 			labels.add_child(LABEL.instantiate())
-	var total: float = _weight_sum(entries)
-	if !entries:
+	var total: float = _weight_sum(entries_array)
+	if !entries_array:
 		push_error("There are no entries to display!")
 	elif total == 0:
 		push_error("All the entries total zero!")
@@ -70,7 +135,7 @@ func _draw() -> void:
 	var all_labels: = labels.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
 	var number_of_points: int = ceili(64.0 / size_of_entries)
 	for i: int in size_of_entries:
-		var entry: PieChartEntry = entries[i]
+		var entry: PieChartEntry = entries_array[i]
 		assert(entry.weight >= 0.0, "Individual value must be at least zero!")
 		# Drawing on the screen
 		var percentage: float = entry.weight / (total * 0.01)
@@ -82,13 +147,13 @@ func _draw() -> void:
 		label.position = (angle_point * 1.5) + center - (label.size / 2)
 		draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
 		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, number_of_points)
-		if show_separation:
+		if separation_show:
 			draw_line(center, Vector2.from_angle(angle) * radius + center, Color.WHITE, 2, true)
 		previous_angle += current_angle
 	var title_label: = $TitleLabel as RichTextLabel
-	title_label.visible = show_title
-	if show_title:
+	title_label.visible = title_show
+	if title_show:
 		draw_circle(center, radius * 0.60, Color.WHITE)
-		title_label.text = title
+		title_label.text = title_text
 		title_label.size = Vector2.ONE * radius
 		title_label.position = center - (title_label.size / 2)
