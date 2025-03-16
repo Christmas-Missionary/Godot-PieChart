@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://cvdfxlecvtmfq"]
+
+[ext_resource type="Script" uid="uid://c0lo3i2syv80" path="res://tests/entry_modes/entry_modes.gd" id="1_55nm0"]
+[ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="1_tplsb"]
+[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="2_uasie"]
+[ext_resource type="Script" uid="uid://bkpvxg7d28i8o" path="res://src/entry_pack.gd" id="3_tj8ny"]
+[ext_resource type="Script" uid="uid://bn30f1hvpdkk" path="res://src/entry_quick_pack.gd" id="4_mq0rk"]
+
+[sub_resource type="Resource" id="Resource_tj8ny"]
+script = ExtResource("2_uasie")
+name = "Array"
+weight = 1.0
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_mq0rk"]
+script = ExtResource("2_uasie")
+name = "Pack"
+weight = 1.0
+color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_55nm0"]
+script = ExtResource("3_tj8ny")
+array_of_entries = Array[ExtResource("2_uasie")]([SubResource("Resource_mq0rk")])
+metadata/_custom_type_script = "uid://bkpvxg7d28i8o"
+
+[sub_resource type="Resource" id="Resource_14h3g"]
+script = ExtResource("4_mq0rk")
+color_scale = 0
+values = Dictionary[String, float]({
+"Dictionary": 1.0,
+"Part 2": 1.0
+})
+metadata/_custom_type_script = "uid://bn30f1hvpdkk"
+
+[node name="EntryModes" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_55nm0")
+
+[node name="Subject" parent="." instance=ExtResource("1_tplsb")]
+layout_mode = 1
+entries_array = Array[ExtResource("2_uasie")]([SubResource("Resource_tj8ny")])
+entries_pack = SubResource("Resource_55nm0")
+entries_quick_values = SubResource("Resource_14h3g")
+title_show = false
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
