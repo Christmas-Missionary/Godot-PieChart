@@ -11,25 +11,31 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 @export var entries_array: Array[PieChartEntry]:
 	set(val):
 		entries_array = val
-		queue_redraw()
+		if entries_mode == ENTRY_MODE.ENTRY_ARRAY:
+			queue_redraw()
 	get():
-		queue_redraw()
+		if entries_mode == ENTRY_MODE.ENTRY_ARRAY:
+			queue_redraw()
 		return entries_array
 
 @export var entries_pack: EntryPack:
 	set(val):
 		entries_pack = val
-		queue_redraw()
+		if entries_mode == ENTRY_MODE.ENTRY_PACK:
+			queue_redraw()
 	get():
-		queue_redraw()
+		if entries_mode == ENTRY_MODE.ENTRY_PACK:
+			queue_redraw()
 		return entries_pack
 
 @export var entries_quick_values: EntryQuickPack:
 	set(val):
 		entries_quick_values = val
-		queue_redraw()
+		if entries_mode == ENTRY_MODE.QUICK_ENTRY_PACK:
+			queue_redraw()
 	get():
-		queue_redraw()
+		if entries_mode == ENTRY_MODE.QUICK_ENTRY_PACK:
+			queue_redraw()
 		return entries_quick_values
 
 @export_group("title", "title_")
