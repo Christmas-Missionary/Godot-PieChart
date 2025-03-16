@@ -42,17 +42,20 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 @export var title_text: String:
 	set(val):
 		title_text = val
-		queue_redraw()
+		if title_show:
+			queue_redraw()
 
 @export var title_circle_color: Color:
 	set(val):
 		title_circle_color = val
-		queue_redraw()
+		if title_show:
+			queue_redraw()
 
-@export var title_circle_radius: float:
+@export_range(0, 1000) var title_circle_radius: float:
 	set(val):
 		title_circle_radius = val
-		queue_redraw()
+		if title_show:
+			queue_redraw()
 
 @export var title_show: bool = true:
 	set(val):
@@ -63,6 +66,8 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 	set(val):
 		title_bbcode_enabled = val
 		($TitleLabel as RichTextLabel).bbcode_enabled = val
+		if title_show:
+			queue_redraw()
 
 @export_group("label", "label_")
 @export var label_show_name: bool = true:
@@ -190,7 +195,7 @@ func _draw() -> void:
 	var title_label: = $TitleLabel as RichTextLabel
 	title_label.visible = title_show
 	if title_show:
-		draw_circle(center, radius * 0.60, Color.WHITE)
+		draw_circle(center, title_circle_radius, title_circle_color)
 		title_label.text = title_text
 		title_label.size = Vector2.ONE * radius
 		title_label.position = center - (title_label.size / 2)
