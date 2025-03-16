@@ -114,18 +114,49 @@ func _weight_sum(arr: Array[PieChartEntry]) -> float:
 		res += elem.weight
 	return res
 
+func test(val: Color) -> Color: return val
+
+func _entry_quick_pack_to_arr(quick_pack: EntryQuickPack) -> Array[PieChartEntry]:
+	var names: = quick_pack.values.keys() as Array[String]
+	var weights: = quick_pack.values.values() as Array[float]
+	
+	var r_inc: int
+	var g_inc: int
+	var b_inc: int
+	
+	match quick_pack.color_scale:
+		EntryQuickPack.COLOR_SCALE.GREY_SCALE:
+			r_inc = 50
+			g_inc = 50
+			b_inc = 50
+	
+	var res: Array[PieChartEntry]
+	res.resize(quick_pack.values.size())
+	var color_generated: Color
+	for i: int in quick_pack.values.size():
+		res[i] = PieChartEntry.new(names[i], weights[i], color_generated)
+		color_generated.r8 += r_inc
+		color_generated.g8 += g_inc
+		color_generated.b8 += b_inc
+	return res
+
 func _draw() -> void:
 	const LABEL: PackedScene = preload("res://src/entry_label.tscn")
 	var labels: Node = $Labels
-	var size_of_entries: int = entries_array.size()
+	var all_entries: Array[PieChartEntry] = (
+		entries_array if entries_mode == ENTRY_MODE.ENTRY_ARRAY else 
+		entries_pack.array_of_entries if entries_mode == ENTRY_MODE.ENTRY_PACK else
+		_entry_quick_pack_to_arr(entries_quick_values)
+	)
+	var size_of_entries: int = all_entries.size()
 	if size_of_entries < labels.get_child_count():
 		for i in (labels.get_child_count() - size_of_entries):
 			labels.get_children()[i].queue_free()
 	elif size_of_entries > labels.get_child_count():
 		for _i in (size_of_entries - labels.get_child_count()):
 			labels.add_child(LABEL.instantiate())
-	var total: float = _weight_sum(entries_array)
-	if !entries_array:
+	var total: float = _weight_sum(all_entries)
+	if !all_entries:
 		push_error("There are no entries to display!")
 	elif total == 0:
 		push_error("All the entries total zero!")
@@ -135,7 +166,7 @@ func _draw() -> void:
 	var all_labels: = labels.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
 	var number_of_points: int = ceili(64.0 / size_of_entries)
 	for i: int in size_of_entries:
-		var entry: PieChartEntry = entries_array[i]
+		var entry: PieChartEntry = all_entries[i]
 		assert(entry.weight >= 0.0, "Individual value must be at least zero!")
 		# Drawing on the screen
 		var percentage: float = entry.weight / (total * 0.01)
