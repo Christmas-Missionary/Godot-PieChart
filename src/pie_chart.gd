@@ -107,7 +107,7 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 		queue_redraw()
 
 # find number of points/sides needed for perfect circle
-func draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
+func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
 	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
 	var rads_to_rotate: float = (rads_to - rads_from) / number_of_points
 	var points_arc: PackedVector2Array
@@ -124,8 +124,6 @@ func _weight_sum(arr: Array[PieChartEntry]) -> float:
 	for elem: PieChartEntry in arr:
 		res += elem.weight
 	return res
-
-func test(val: Color) -> Color: return val
 
 func _entry_quick_pack_to_arr(quick_pack: EntryQuickPack) -> Array[PieChartEntry]:
 	var names: = quick_pack.values.keys() as Array[String]
@@ -195,7 +193,7 @@ func _draw() -> void:
 		label.position = (angle_point * (0.5 if label_is_in_slice else 1.7)) + center - (label.size / 2)
 		if label.text != "" and !label_is_in_slice:
 			draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
-		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, number_of_points)
+		_draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, number_of_points)
 		separation_angles[i] = angle
 		previous_angle += current_angle
 	if separation_show:
