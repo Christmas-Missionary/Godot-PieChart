@@ -111,7 +111,8 @@ func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rad
 	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
 	var rads_to_rotate: float = (rads_to - rads_from) / number_of_points
 	var points_arc: PackedVector2Array
-	points_arc.resize(number_of_points + 2)
+	var err: int = points_arc.resize(number_of_points + 2)
+	assert(err == Error.OK, "Something horribly wrong has happened!")
 	points_arc[0] = center
 	points_arc[1] = previous_vec + center
 	for i: int in range(2, number_of_points + 2):
@@ -126,8 +127,8 @@ func _weight_sum(arr: Array[PieChartEntry]) -> float:
 	return res
 
 func _entry_quick_pack_to_arr(quick_pack: EntryQuickPack) -> Array[PieChartEntry]:
-	var names: = quick_pack.values.keys() as Array[String]
-	var weights: = quick_pack.values.values() as Array[float]
+	var names: Array[String] = quick_pack.values.keys() as Array[String]
+	var weights: Array[float] = quick_pack.values.values() as Array[float]
 	
 	var r_inc: int
 	var g_inc: int
@@ -140,7 +141,8 @@ func _entry_quick_pack_to_arr(quick_pack: EntryQuickPack) -> Array[PieChartEntry
 			b_inc = 50
 	
 	var res: Array[PieChartEntry]
-	res.resize(quick_pack.values.size())
+	var err: int = res.resize(quick_pack.values.size())
+	assert(err == Error.OK, "Something horribly wrong has happened!")
 	var color_generated: Color
 	for i: int in quick_pack.values.size():
 		res[i] = PieChartEntry.new(names[i], weights[i], color_generated)
@@ -159,10 +161,10 @@ func _draw() -> void:
 	)
 	var size_of_entries: int = all_entries.size()
 	if size_of_entries < labels.get_child_count():
-		for i in (labels.get_child_count() - size_of_entries):
+		for i: int in (labels.get_child_count() - size_of_entries):
 			labels.get_children()[i].queue_free()
 	elif size_of_entries > labels.get_child_count():
-		for _i in (size_of_entries - labels.get_child_count()):
+		for _i: int in (size_of_entries - labels.get_child_count()):
 			labels.add_child(LABEL.instantiate())
 	var total: float = _weight_sum(all_entries)
 	if !all_entries:
@@ -172,10 +174,11 @@ func _draw() -> void:
 	var center: Vector2 = size / 2
 	var radius: float = minf(size.x, size.y) / 4
 	var previous_angle: float = 0
-	var all_labels: = labels.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
+	var all_labels: Array[Node] = labels.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
 	var number_of_points: int = ceili(64.0 / size_of_entries)
 	var separation_angles: PackedFloat64Array
-	separation_angles.resize(size_of_entries)
+	var err: int = separation_angles.resize(size_of_entries)
+	assert(err == Error.OK, "Something horribly wrong has happened!")
 	for i: int in size_of_entries:
 		var entry: PieChartEntry = all_entries[i]
 		assert(entry.weight >= 0.0, "Someone changed the range of `weight` in PieChartEntry!")
@@ -184,7 +187,7 @@ func _draw() -> void:
 		var current_angle: float = percentage * 0.0628318530717959 # (TAU * 0.01)
 		var angle: float = current_angle + previous_angle
 		var angle_point: Vector2 = Vector2.from_angle(angle - (current_angle / 2)) * radius
-		var label: = all_labels[i] as Label
+		var label: Label = all_labels[i] as Label
 		label.text = (
 			("Name: %s\n" % entry.name if label_show_name else "") +
 			("Weight: %.2f\n" % entry.weight if label_show_weights else "") +
@@ -199,7 +202,7 @@ func _draw() -> void:
 	if separation_show:
 		for angle: float in separation_angles:
 			draw_line(center, Vector2.from_angle(angle) * radius + center, separation_color, separation_thickness, true)
-	var title_label: = $TitleLabel as RichTextLabel
+	var title_label: RichTextLabel = $TitleLabel as RichTextLabel
 	title_label.visible = title_show
 	if title_show:
 		draw_circle(center, title_circle_radius, title_circle_color)
