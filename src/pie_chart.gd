@@ -77,17 +77,17 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 
 @export var label_show_weights: bool = true:
 	set(val):
-		label_show_name = val
+		label_show_weights = val
 		queue_redraw()
 
 @export var label_show_percentage: bool = true:
 	set(val):
-		label_show_name = val
+		label_show_percentage = val
 		queue_redraw()
 
 @export var label_is_in_slice: bool:
 	set(val):
-		label_show_name = val
+		label_is_in_slice = val
 		queue_redraw()
 
 @export_group("separation", "separation_")
@@ -185,9 +185,14 @@ func _draw() -> void:
 		var angle: float = current_angle + previous_angle
 		var angle_point: Vector2 = Vector2.from_angle(angle - (current_angle / 2)) * radius
 		var label: = all_labels[i] as Label
-		label.text = "%s\n%.2f%%" % [entry.name, percentage]
-		label.position = (angle_point * 1.5) + center - (label.size / 2)
-		draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
+		label.text = (
+			("Name: %s\n" % entry.name if label_show_name else "") +
+			("Weight: %.2f\n" % entry.weight if label_show_weights else "") +
+			("Percentage: %.2f%%\n" % percentage if label_show_percentage else "")
+		)
+		label.position = (angle_point * (0.5 if label_is_in_slice else 1.7)) + center - (label.size / 2)
+		if label.text != "" and !label_is_in_slice:
+			draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
 		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, number_of_points)
 		if separation_show:
 			draw_line(center, Vector2.from_angle(angle) * radius + center, Color.WHITE, 2, true)
