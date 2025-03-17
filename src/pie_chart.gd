@@ -106,6 +106,12 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 		separation_thickness = val
 		queue_redraw()
 
+@export_group("Slices")
+@export_range(0, 10) var chart_radius_multiplier: float = 1.0: 
+	set(val):
+		chart_radius_multiplier = val
+		queue_redraw()
+
 # find number of points/sides needed for perfect circle
 func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
 	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
@@ -172,7 +178,7 @@ func _draw() -> void:
 	elif total == 0:
 		push_error("All the entries total zero!")
 	var center: Vector2 = size / 2
-	var radius: float = minf(size.x, size.y) / 4
+	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier
 	var previous_angle: float = 0
 	var all_labels: Array[Node] = labels.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
 	var number_of_points: int = ceili(64.0 / size_of_entries)
