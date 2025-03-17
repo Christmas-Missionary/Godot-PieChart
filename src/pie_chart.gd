@@ -101,7 +101,7 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 		separation_color = val
 		queue_redraw()
 
-@export var separation_thickness: float:
+@export_range(0, 1000) var separation_thickness: float:
 	set(val):
 		separation_thickness = val
 		queue_redraw()
@@ -176,6 +176,8 @@ func _draw() -> void:
 	var previous_angle: float = 0
 	var all_labels: = labels.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
 	var number_of_points: int = ceili(64.0 / size_of_entries)
+	var separation_angles: PackedFloat64Array
+	separation_angles.resize(size_of_entries)
 	for i: int in size_of_entries:
 		var entry: PieChartEntry = all_entries[i]
 		assert(entry.weight >= 0.0, "Someone changed the range of `weight` in PieChartEntry!")
@@ -194,9 +196,11 @@ func _draw() -> void:
 		if label.text != "" and !label_is_in_slice:
 			draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
 		draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, number_of_points)
-		if separation_show:
-			draw_line(center, Vector2.from_angle(angle) * radius + center, Color.WHITE, 2, true)
+		separation_angles[i] = angle
 		previous_angle += current_angle
+	if separation_show:
+		for angle: float in separation_angles:
+			draw_line(center, Vector2.from_angle(angle) * radius + center, separation_color, separation_thickness, true)
 	var title_label: = $TitleLabel as RichTextLabel
 	title_label.visible = title_show
 	if title_show:
