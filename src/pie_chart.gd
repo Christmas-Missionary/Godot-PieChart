@@ -2,7 +2,7 @@ extends Control
 class_name PieChart
 enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 
-@export_group("entry", "entries_")
+@export_group("Entry", "entries_")
 @export var entries_mode: ENTRY_MODE:
 	set(val):
 		entries_mode = val
@@ -38,7 +38,7 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 			queue_redraw()
 		return entries_quick_values
 
-@export_group("title", "title_")
+@export_group("Title", "title_")
 @export var title_text: String:
 	set(val):
 		title_text = val
@@ -69,7 +69,7 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 		if title_show:
 			queue_redraw()
 
-@export_group("label", "label_")
+@export_group("Label", "label_")
 @export var label_show_name: bool = true:
 	set(val):
 		label_show_name = val
@@ -90,7 +90,7 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 		label_is_in_slice = val
 		queue_redraw()
 
-@export_group("separation", "separation_")
+@export_group("Separation", "separation_")
 @export var separation_show: bool:
 	set(val):
 		separation_show = val
