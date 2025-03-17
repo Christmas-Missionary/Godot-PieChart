@@ -178,7 +178,7 @@ func _draw() -> void:
 	var number_of_points: int = ceili(64.0 / size_of_entries)
 	for i: int in size_of_entries:
 		var entry: PieChartEntry = all_entries[i]
-		assert(entry.weight >= 0.0, "Individual value must be at least zero!")
+		assert(entry.weight >= 0.0, "Someone changed the range of `weight` in PieChartEntry!")
 		# Drawing on the screen
 		var percentage: float = entry.weight / (total * 0.01)
 		var current_angle: float = percentage * 0.0628318530717959 # (TAU * 0.01)
