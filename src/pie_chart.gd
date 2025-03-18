@@ -53,6 +53,7 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 
 @export_range(0, 1000) var title_circle_radius: float:
 	set(val):
+		assert(title_circle_radius >= 0, "Someone changed the range of `title_circle_radius` in PieChart!")
 		title_circle_radius = val
 		if title_show:
 			queue_redraw()
@@ -103,12 +104,14 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 
 @export_range(0, 1000) var separation_thickness: float:
 	set(val):
+		assert(separation_thickness >= 0, "Someone changed the range of `separation_thickness` in PieChart!")
 		separation_thickness = val
 		queue_redraw()
 
 @export_group("Slices")
 @export_range(0, 10) var chart_radius_multiplier: float = 1.0: 
 	set(val):
+		assert(chart_radius_multiplier >= 0, "Someone changed the range of `chart_radius_multiplier` in PieChart!")
 		chart_radius_multiplier = val
 		queue_redraw()
 
@@ -187,7 +190,6 @@ func _draw() -> void:
 	assert(err == Error.OK, "Something horribly wrong has happened!")
 	for i: int in size_of_entries:
 		var entry: PieChartEntry = all_entries[i]
-		assert(entry.weight >= 0.0, "Someone changed the range of `weight` in PieChartEntry!")
 		# Drawing on the screen
 		var percentage: float = entry.weight / (total * 0.01)
 		var current_angle: float = percentage * 0.0628318530717959 # (TAU * 0.01)
