@@ -38,6 +38,13 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 			queue_redraw()
 		return entries_quick_values
 
+@export_group("Slices")
+@export_range(0, 10) var chart_radius_multiplier: float = 1.0: 
+	set(val):
+		assert(chart_radius_multiplier >= 0, "Someone changed the range of `chart_radius_multiplier` in PieChart!")
+		chart_radius_multiplier = val
+		queue_redraw()
+
 var _title_label: RichTextLabel = preload("res://src/title_label.tscn").instantiate() as RichTextLabel
 
 @export_group("Title", "title_")
@@ -110,13 +117,6 @@ var _entry_label_parent: Control = preload("res://src/labels.tscn").instantiate(
 	set(val):
 		assert(separation_thickness >= 0, "Someone changed the range of `separation_thickness` in PieChart!")
 		separation_thickness = val
-		queue_redraw()
-
-@export_group("Slices")
-@export_range(0, 10) var chart_radius_multiplier: float = 1.0: 
-	set(val):
-		assert(chart_radius_multiplier >= 0, "Someone changed the range of `chart_radius_multiplier` in PieChart!")
-		chart_radius_multiplier = val
 		queue_redraw()
 
 func _init() -> void:
