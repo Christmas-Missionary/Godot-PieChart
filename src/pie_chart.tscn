@@ -10,19 +10,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4kfxg")
-
-[node name="TitleLabel" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-offset_right = 1.0
-offset_bottom = 23.0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Labels" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2

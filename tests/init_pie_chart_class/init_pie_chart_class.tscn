@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm5w532wmyeub"]
+
+[ext_resource type="Script" uid="uid://be84rofrr5inn" path="res://tests/init_pie_chart_class/init_pie_chart_class.gd" id="1_pk6ma"]
+[ext_resource type="Script" uid="uid://biulhvvte3dvh" path="res://src/pie_chart.gd" id="2_v4a7v"]
+[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="3_nmhi1"]
+
+[sub_resource type="Resource" id="Resource_cojk0"]
+script = ExtResource("3_nmhi1")
+name = "Test 2"
+weight = 1.0
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[node name="InitPieChartClass" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pk6ma")
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_right = 40.0
+
+[node name="Container2" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Subject2" type="Control" parent="Container2"]
+anchors_preset = 0
+script = ExtResource("2_v4a7v")
+entries_array = Array[ExtResource("3_nmhi1")]([SubResource("Resource_cojk0")])
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
