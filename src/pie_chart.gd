@@ -170,7 +170,6 @@ func _entry_quick_pack_to_arr(quick_pack: EntryQuickPack) -> Array[PieChartEntry
 	return res
 
 func _draw() -> void:
-	const LABEL: PackedScene = preload("res://src/entry_label.tscn")
 	var label_nodes: Array[Node] = _entry_label_parent.get_children()
 	var all_entries: Array[PieChartEntry] = (
 		entries_array if entries_mode == ENTRY_MODE.ENTRY_ARRAY else 
@@ -183,42 +182,48 @@ func _draw() -> void:
 			label_nodes[i].queue_free()
 	elif size_of_entries > label_nodes.size():
 		for _i: int in (size_of_entries - label_nodes.size()):
-			_entry_label_parent.add_child(LABEL.instantiate())
-	var total: float = _weight_sum(all_entries)
+			_entry_label_parent.add_child(preload("res://src/entry_label.tscn").instantiate())
+	var hundredth_of_total: float = _weight_sum(all_entries) * 0.01
 	if !all_entries:
 		push_error("There are no entries to display!")
-	elif total == 0:
+	elif hundredth_of_total == 0:
 		push_error("All the entries total zero!")
 	var center: Vector2 = size / 2
 	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier
-	var previous_angle: float = 0
+	var begin_rads: float = 0
 	label_nodes = _entry_label_parent.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
 	var number_of_points: int = ceili(64.0 / size_of_entries)
 	var separation_angles: PackedFloat64Array
-	var err: int = separation_angles.resize(size_of_entries)
+	var err: int = separation_angles.resize(size_of_entries) # DO NOT put this line inside assert
 	assert(err == Error.OK, "Something horribly wrong has happened!")
 	for i: int in size_of_entries:
+		
 		var entry: PieChartEntry = all_entries[i]
-		# Drawing on the screen
-		var percentage: float = entry.weight / (total * 0.01)
-		var current_angle: float = percentage * 0.0628318530717959 # (TAU * 0.01)
-		var angle: float = current_angle + previous_angle
-		var angle_point: Vector2 = Vector2.from_angle(angle - (current_angle / 2)) * radius
+		
+		var percentage: float = entry.weight / hundredth_of_total
+		var rads_from_begin_angle: float = percentage * 0.0628318530717959 # (TAU * 0.01)
+		var sum_of_rads: float = rads_from_begin_angle + begin_rads
+		
+		# To EntryLabel Class somehow maybe? draw_line only works in it's own _draw()
 		var label: Label = label_nodes[i] as Label
 		label.text = (
 			("Name: %s\n" % entry.name if label_show_name else "") +
 			("Weight: %.2f\n" % entry.weight if label_show_weights else "") +
 			("Percentage: %.2f%%\n" % percentage if label_show_percentage else "")
 		)
-		label.position = (angle_point * (0.5 if label_is_in_slice else 1.7)) + center - (label.size / 2)
+		var label_angle_point: Vector2 = Vector2.from_angle(sum_of_rads - (rads_from_begin_angle / 2)) * radius
+		label.position = (label_angle_point * (0.5 if label_is_in_slice else 1.7)) + center - (label.size / 2)
 		if label.text != "" and !label_is_in_slice:
-			draw_line((angle_point * 1.05) + center, (angle_point * 1.2) + center, Color.WHITE, 2, true)
-		_draw_circle_arc_poly(center, radius, previous_angle, previous_angle + current_angle, entry.color, number_of_points)
-		separation_angles[i] = angle
-		previous_angle += current_angle
+			draw_line((label_angle_point * 1.05) + center, (label_angle_point * 1.2) + center, Color.WHITE, 2, true)
+		
+		_draw_circle_arc_poly(center, radius, begin_rads, begin_rads + rads_from_begin_angle, entry.color, number_of_points)
+		separation_angles[i] = sum_of_rads
+		begin_rads += rads_from_begin_angle
 	if separation_show:
 		for angle: float in separation_angles:
 			draw_line(center, Vector2.from_angle(angle) * radius + center, separation_color, separation_thickness, true)
+	
+	# This should all go in TitleLabel class
 	_title_label.visible = title_show
 	if title_show:
 		draw_circle(center, title_circle_radius, title_circle_color)
