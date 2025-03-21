@@ -18,7 +18,7 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 			queue_redraw()
 		return entries_array
 
-@export var entries_pack: EntryPack:
+@export var entries_pack: PieChartEntryPack:
 	set(val):
 		entries_pack = val
 		if entries_mode == ENTRY_MODE.ENTRY_PACK:
@@ -28,7 +28,7 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 			queue_redraw()
 		return entries_pack
 
-@export var entries_quick_values: EntryQuickPack:
+@export var entries_quick_values: PieChartEntryQuickPack:
 	set(val):
 		entries_quick_values = val
 		if entries_mode == ENTRY_MODE.QUICK_ENTRY_PACK:
@@ -144,7 +144,7 @@ func _weight_sum(arr: Array[PieChartEntry]) -> float:
 		res += elem.weight
 	return res
 
-func _entry_quick_pack_to_arr(quick_pack: EntryQuickPack) -> Array[PieChartEntry]:
+func _entry_quick_pack_to_arr(quick_pack: PieChartEntryQuickPack) -> Array[PieChartEntry]:
 	var names: Array[String] = quick_pack.values.keys() as Array[String]
 	var weights: Array[float] = quick_pack.values.values() as Array[float]
 	
@@ -153,7 +153,7 @@ func _entry_quick_pack_to_arr(quick_pack: EntryQuickPack) -> Array[PieChartEntry
 	var b_inc: int
 	
 	match quick_pack.color_scale:
-		EntryQuickPack.COLOR_SCALE.GREY_SCALE:
+		PieChartEntryQuickPack.COLOR_SCALE.GREY_SCALE:
 			r_inc = 50
 			g_inc = 50
 			b_inc = 50

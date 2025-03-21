@@ -1,5 +1,5 @@
 extends Resource
-class_name EntryQuickPack
+class_name PieChartEntryQuickPack
 
 enum COLOR_SCALE {GREY_SCALE}
 @export var color_scale: COLOR_SCALE

@@ -1,5 +1,5 @@
 extends Resource
-class_name EntryPack
+class_name PieChartEntryPack
 
 @export var array_of_entries: Array[PieChartEntry]
 
