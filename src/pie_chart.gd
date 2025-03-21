@@ -79,8 +79,6 @@ var _title_label: RichTextLabel = preload("res://src/title_label.tscn").instanti
 		if title_show:
 			queue_redraw()
 
-var _entry_label_parent: Control = preload("res://src/labels.tscn").instantiate() as Control
-
 @export_group("Label", "label_")
 @export var label_show_name: bool = true:
 	set(val):
@@ -122,7 +120,6 @@ var _entry_label_parent: Control = preload("res://src/labels.tscn").instantiate(
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(_title_label, false, Node.INTERNAL_MODE_FRONT)
-	add_child(_entry_label_parent, false, Node.INTERNAL_MODE_FRONT)
 
 # find number of points/sides needed for perfect circle
 func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
@@ -170,7 +167,7 @@ func _entry_quick_pack_to_arr(quick_pack: PieChartEntryQuickPack) -> Array[PieCh
 	return res
 
 func _draw() -> void:
-	var label_nodes: Array[Node] = _entry_label_parent.get_children()
+	var label_nodes: Array[Node] = get_children().filter(func(node: Node) -> bool: return node is Label) as Array[Node]
 	var all_entries: Array[PieChartEntry] = (
 		entries_array if entries_mode == ENTRY_MODE.ENTRY_ARRAY else 
 		entries_pack.array_of_entries if entries_mode == ENTRY_MODE.ENTRY_PACK else
@@ -182,7 +179,7 @@ func _draw() -> void:
 			label_nodes[i].queue_free()
 	elif size_of_entries > label_nodes.size():
 		for _i: int in (size_of_entries - label_nodes.size()):
-			_entry_label_parent.add_child(preload("res://src/entry_label.tscn").instantiate())
+			add_child(preload("res://src/entry_label.tscn").instantiate())
 	var hundredth_of_total: float = _weight_sum(all_entries) * 0.01
 	if !all_entries:
 		push_error("There are no entries to display!")
@@ -191,7 +188,7 @@ func _draw() -> void:
 	var center: Vector2 = size / 2
 	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier
 	var begin_rads: float = 0
-	label_nodes = _entry_label_parent.get_children().filter(func(val: Node) -> bool: return !val.is_queued_for_deletion()) as Array[Node]
+	label_nodes = get_children().filter(func(node: Node) -> bool: return node is Label && !node.is_queued_for_deletion()) as Array[Node]
 	var number_of_points: int = ceili(64.0 / size_of_entries)
 	var separation_angles: PackedFloat64Array
 	var err: int = separation_angles.resize(size_of_entries) # DO NOT put this line inside assert
