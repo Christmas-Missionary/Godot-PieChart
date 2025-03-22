@@ -45,40 +45,6 @@ enum ENTRY_MODE {ENTRY_ARRAY, ENTRY_PACK, QUICK_ENTRY_PACK}
 		chart_radius_multiplier = val
 		queue_redraw()
 
-var _title_label: RichTextLabel = preload("res://src/title_label.tscn").instantiate() as RichTextLabel
-
-@export_group("Title", "title_")
-@export var title_text: String:
-	set(val):
-		title_text = val
-		if title_show:
-			queue_redraw()
-
-@export var title_circle_color: Color:
-	set(val):
-		title_circle_color = val
-		if title_show:
-			queue_redraw()
-
-@export_range(0, 1000) var title_circle_radius: float:
-	set(val):
-		assert(title_circle_radius >= 0, "Someone changed the range of `title_circle_radius` in PieChart!")
-		title_circle_radius = val
-		if title_show:
-			queue_redraw()
-
-@export var title_show: bool = true:
-	set(val):
-		title_show = val
-		queue_redraw()
-
-@export var title_bbcode_enabled: bool:
-	set(val):
-		title_bbcode_enabled = val
-		_title_label.bbcode_enabled = val
-		if title_show:
-			queue_redraw()
-
 @export_group("Label", "label_")
 @export var label_show_name: bool = true:
 	set(val):
@@ -119,7 +85,6 @@ var _title_label: RichTextLabel = preload("res://src/title_label.tscn").instanti
 
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(_title_label, false, Node.INTERNAL_MODE_FRONT)
 
 # find number of points/sides needed for perfect circle
 func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
@@ -219,11 +184,3 @@ func _draw() -> void:
 	if separation_show:
 		for angle: float in separation_angles:
 			draw_line(center, Vector2.from_angle(angle) * radius + center, separation_color, separation_thickness, true)
-	
-	# This should all go in TitleLabel class
-	_title_label.visible = title_show
-	if title_show:
-		draw_circle(center, title_circle_radius, title_circle_color)
-		_title_label.text = title_text
-		_title_label.set_deferred(&"size", Vector2.ONE * radius)
-		_title_label.position = center - (Vector2.ONE * radius / 2)
