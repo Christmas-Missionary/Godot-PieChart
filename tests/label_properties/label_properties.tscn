@@ -48,26 +48,32 @@ chart_radius_multiplier = 1.2
 [node name="EntryLabel4" parent="Subject" instance=ExtResource("3_hnhdq")]
 layout_mode = 0
 theme_override_font_sizes/normal_font_size = 30
+text = "%n %p %w"
 entry = SubResource("Resource_8aoji")
 
 [node name="EntryLabel2" type="RichTextLabel" parent="Subject"]
 layout_mode = 1
 anchors_preset = -1
 offset_right = 1.0
-text = "test"
+bbcode_enabled = true
+text = "[wave]Name: %n
+Weight: %w
+Percentage %p
+%%"
 script = ExtResource("3_jqn6q")
 entry = SubResource("Resource_fh3om")
-show_weights = false
 separation_color = Color(0, 0, 1, 1)
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="EntryLabel" type="RichTextLabel" parent="Subject"]
 layout_mode = 0
 offset_right = 1.0
+text = "Name: %n
+Weight: %w
+Percentage %p"
 script = ExtResource("3_jqn6q")
 entry = SubResource("Resource_hnhdq")
 is_in_slice = true
-show_percentage = false
 separation_color = Color(1, 0.282353, 1, 1)
 separation_thickness = 10.0
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
@@ -75,10 +81,9 @@ metadata/_custom_type_script = "uid://w8g4uchaio4c"
 [node name="EntryLabel3" type="RichTextLabel" parent="Subject"]
 layout_mode = 0
 offset_right = 1.0
+theme_override_font_sizes/normal_font_size = 25
+text = "My name is %n and I have %p of the pie chart!"
 script = ExtResource("3_jqn6q")
 entry = SubResource("Resource_22hbe")
-show_name = false
-show_weights = false
-show_percentage = false
 separation_show = false
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
