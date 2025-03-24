@@ -3,11 +3,7 @@
 [ext_resource type="Script" uid="uid://dg1804s2dc2k1" path="res://src/title_label.gd" id="1_i3n7q"]
 
 [node name="TitleLabel" type="RichTextLabel"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 1.0
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_i3n7q")
