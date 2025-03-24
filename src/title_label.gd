@@ -1,6 +1,7 @@
 extends RichTextLabel
 class_name PieChartTitleLabel
 
+@export_group("Circle", "circle_")
 @export var circle_color: Color:
 	set(val):
 		circle_color = val
@@ -12,7 +13,8 @@ class_name PieChartTitleLabel
 		circle_radius = val
 		_drawer.queue_redraw()
 
-@onready var _drawer: Node2D = preload("res://src/circle_drawer.tscn").instantiate() as Node2D
+var _drawer: Node2D = preload("res://src/circle_drawer.tscn").instantiate() as Node2D
 
 func _ready() -> void:
+	size = (get_parent() as Control).size
 	add_child(_drawer, false, Node.INTERNAL_MODE_FRONT)
