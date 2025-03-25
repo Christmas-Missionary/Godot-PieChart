@@ -1,5 +1,4 @@
-extends RichTextLabel
-class_name PieChartTitleLabel
+class_name PieChartTitleLabel extends RichTextLabel
 
 @export_group("Circle", "circle_")
 @export var circle_color: Color:

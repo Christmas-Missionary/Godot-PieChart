@@ -1,5 +1,4 @@
-extends RichTextLabel
-class_name EntryLabel
+class_name EntryLabel extends RichTextLabel
 
 signal property_changed
 

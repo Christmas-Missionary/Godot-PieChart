@@ -1,5 +1,4 @@
-extends Resource
-class_name PieChartEntry
+class_name PieChartEntry extends Resource
 
 @export var name: String
 @export_range(0, 2 ** 64) var weight: float
