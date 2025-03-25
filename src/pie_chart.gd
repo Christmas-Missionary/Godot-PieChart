@@ -7,6 +7,34 @@ class_name PieChart extends Control
 		chart_radius_multiplier = val
 		queue_redraw()
 
+## Not used by src directly
+static func entry_quick_pack_to_arr(quick_pack: PieChartEntryQuickPack) -> Array[PieChartEntry]:
+	var names: Array[String] = quick_pack.values.keys() as Array[String]
+	var weights: Array[float] = quick_pack.values.values() as Array[float]
+	var color_rate: Color
+	
+	match quick_pack.color_scale:
+		PieChartEntryQuickPack.COLOR_SCALE.GREY_SCALE:
+			color_rate = Color.from_rgba8(50, 50, 50)
+	
+	var res: Array[PieChartEntry]
+	var err: int = res.resize(quick_pack.values.size())
+	assert(err == Error.OK, "Something horribly wrong has happened!")
+	var color_generated: Color = Color.BLACK
+	for i: int in quick_pack.values.size():
+		res[i] = PieChartEntry.new(names[i], weights[i], color_generated)
+		color_generated += color_rate
+	return res
+
+## Not used by src directly
+func set_up_labels(entries: Array[PieChartEntry], text: Array[String]) -> void:
+	var children: Array[EntryLabel] = children_to_entry_label()
+	for i: int in mini(children.size(), entries.size()):
+		children[i].entry = entries[i]
+	for i: int in mini(children.size(), text.size()):
+		children[i].text = text[i]
+	queue_redraw()
+
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 
@@ -32,31 +60,6 @@ func _weight_sum(arr: Array[EntryLabel]) -> float:
 		push_error("All the entries total zero!")
 	return res
 
-#func _entry_quick_pack_to_arr(quick_pack: PieChartEntryQuickPack) -> Array[PieChartEntry]:
-	#var names: Array[String] = quick_pack.values.keys() as Array[String]
-	#var weights: Array[float] = quick_pack.values.values() as Array[float]
-	#
-	#var r_inc: int
-	#var g_inc: int
-	#var b_inc: int
-	#
-	#match quick_pack.color_scale:
-		#PieChartEntryQuickPack.COLOR_SCALE.GREY_SCALE:
-			#r_inc = 50
-			#g_inc = 50
-			#b_inc = 50
-	#
-	#var res: Array[PieChartEntry]
-	#var err: int = res.resize(quick_pack.values.size())
-	#assert(err == Error.OK, "Something horribly wrong has happened!")
-	#var color_generated: Color
-	#for i: int in quick_pack.values.size():
-		#res[i] = PieChartEntry.new(names[i], weights[i], color_generated)
-		#color_generated.r8 += r_inc
-		#color_generated.g8 += g_inc
-		#color_generated.b8 += b_inc
-	#return res
-
 func children_to_entry_label() -> Array[EntryLabel]:
 	var children: Array[Node] = get_children()
 	var res: Array[EntryLabel]
@@ -67,6 +70,8 @@ func children_to_entry_label() -> Array[EntryLabel]:
 
 func _draw() -> void:
 	var label_nodes: Array[EntryLabel] = children_to_entry_label()
+	if !label_nodes.all(func(node: EntryLabel) -> bool: return node.entry != null):
+		return
 	var hundredth_of_total: float = _weight_sum(label_nodes) * 0.01
 	var center: Vector2 = size / 2
 	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier

@@ -1,37 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlblf8nv7ygav"]
+[gd_scene load_steps=5 format=3 uid="uid://dlblf8nv7ygav"]
 
+[ext_resource type="Script" uid="uid://0sq8g2gs8khl" path="res://tests/label_properties/label_properties.gd" id="1_jqn6q"]
 [ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="1_yv13j"]
-[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="2_fe5u0"]
 [ext_resource type="PackedScene" uid="uid://brfh87432e853" path="res://src/entry_label.tscn" id="3_hnhdq"]
 [ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="3_jqn6q"]
-
-[sub_resource type="Resource" id="Resource_8aoji"]
-script = ExtResource("2_fe5u0")
-name = "Four"
-weight = 1.0
-color = Color(0.698039, 0, 0, 1)
-metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
-
-[sub_resource type="Resource" id="Resource_fh3om"]
-script = ExtResource("2_fe5u0")
-name = "Three"
-weight = 1.0
-color = Color(0, 1, 0, 1)
-metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
-
-[sub_resource type="Resource" id="Resource_hnhdq"]
-script = ExtResource("2_fe5u0")
-name = "Two"
-weight = 1.0
-color = Color(1, 0, 0, 1)
-metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
-
-[sub_resource type="Resource" id="Resource_22hbe"]
-script = ExtResource("2_fe5u0")
-name = "One"
-weight = 1.0
-color = Color(0, 0, 0, 1)
-metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
 
 [node name="LabelProperties" type="Control"]
 layout_mode = 3
@@ -40,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jqn6q")
 
 [node name="Subject" parent="." instance=ExtResource("1_yv13j")]
 layout_mode = 1
@@ -48,31 +21,21 @@ chart_radius_multiplier = 1.2
 [node name="EntryLabel4" parent="Subject" instance=ExtResource("3_hnhdq")]
 layout_mode = 0
 theme_override_font_sizes/normal_font_size = 30
-text = "%n %p %w"
-entry = SubResource("Resource_8aoji")
 
 [node name="EntryLabel2" type="RichTextLabel" parent="Subject"]
 layout_mode = 1
 anchors_preset = -1
 offset_right = 1.0
 bbcode_enabled = true
-text = "[wave]Name: %n
-Weight: %w
-Percentage %p
-%%"
 script = ExtResource("3_jqn6q")
-entry = SubResource("Resource_fh3om")
 separation_color = Color(0, 0, 1, 1)
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="EntryLabel" type="RichTextLabel" parent="Subject"]
 layout_mode = 0
 offset_right = 1.0
-text = "Name: %n
-Weight: %w
-Percentage %p"
+bbcode_enabled = true
 script = ExtResource("3_jqn6q")
-entry = SubResource("Resource_hnhdq")
 is_in_slice = true
 separation_color = Color(1, 0.282353, 1, 1)
 separation_thickness = 10.0
@@ -82,8 +45,6 @@ metadata/_custom_type_script = "uid://w8g4uchaio4c"
 layout_mode = 0
 offset_right = 1.0
 theme_override_font_sizes/normal_font_size = 25
-text = "My name is %n and I have %p of the pie chart!"
 script = ExtResource("3_jqn6q")
-entry = SubResource("Resource_22hbe")
 separation_show = false
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
