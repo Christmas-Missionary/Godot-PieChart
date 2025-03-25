@@ -1,5 +1,4 @@
-extends Control
-class_name PieChart
+class_name PieChart extends Control
 
 @export_group("Slices")
 @export_range(0, 10) var chart_radius_multiplier: float = 1.0: 
