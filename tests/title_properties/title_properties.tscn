@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://ci3abwvh7m8kv"]
+[gd_scene load_steps=10 format=3 uid="uid://ci3abwvh7m8kv"]
 
 [ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="1_7rkng"]
 [ext_resource type="Theme" uid="uid://durdnexxu27mc" path="res://tests/theme.tres" id="1_46qje"]
 [ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="3_ef4hj"]
 [ext_resource type="PackedScene" uid="uid://bpb4wdjkwd08" path="res://src/title_label.tscn" id="4_46qje"]
+[ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="4_aonbn"]
 
-[sub_resource type="Resource" id="Resource_46qje"]
+[sub_resource type="Resource" id="Resource_aonbn"]
 script = ExtResource("3_ef4hj")
-name = "Title Test"
+name = "I'm a label."
 weight = 1.0
-color = Color(0, 1, 0, 1)
+color = Color(1, 1, 1, 1)
 metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
 
 [sub_resource type="Animation" id="Animation_46qje"]
@@ -84,12 +85,20 @@ theme = ExtResource("1_46qje")
 
 [node name="Subject" parent="." instance=ExtResource("1_7rkng")]
 layout_mode = 1
-entries_array = Array[ExtResource("3_ef4hj")]([SubResource("Resource_46qje")])
 
 [node name="TitleLabel" parent="Subject" instance=ExtResource("4_46qje")]
 clip_contents = false
 layout_mode = 1
 text = "[wave]Test"
+
+[node name="PieChartEntryLabel" type="RichTextLabel" parent="Subject"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_aonbn")
+entry = SubResource("Resource_aonbn")
+separation_show = false
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

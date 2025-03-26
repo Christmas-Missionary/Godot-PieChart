@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfsm1dd0qqnlj"]
+[gd_scene load_steps=2 format=3 uid="uid://cfsm1dd0qqnlj"]
 
 [ext_resource type="Script" uid="uid://df08gsx06twi1" path="res://tests/lots_of_entries/lots_of_entries.gd" id="1_uc8r0"]
-[ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="2_5fclq"]
-[ext_resource type="Theme" uid="uid://durdnexxu27mc" path="res://tests/theme.tres" id="3_5fclq"]
 
 [node name="LotsOfEntries" type="Control"]
 layout_mode = 3
@@ -13,8 +11,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uc8r0")
 
-[node name="Subject" parent="." instance=ExtResource("2_5fclq")]
-layout_mode = 1
-theme = ExtResource("3_5fclq")
-title_text = "[wave]Lots of entries"
-title_bbcode_enabled = true
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)

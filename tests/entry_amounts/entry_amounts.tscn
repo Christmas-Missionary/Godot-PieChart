@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://co8w0el1se3wx"]
+[gd_scene load_steps=4 format=3 uid="uid://co8w0el1se3wx"]
 
 [ext_resource type="Script" uid="uid://bvhksflr1p7lo" path="res://tests/entry_amounts/entry_amounts.gd" id="1_mmcba"]
 [ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="1_y2r04"]
+[ext_resource type="PackedScene" uid="uid://brfh87432e853" path="res://src/entry_label.tscn" id="3_vhjni"]
 
 [node name="EntryAmounts" type="Control"]
 layout_mode = 3
@@ -14,6 +15,15 @@ script = ExtResource("1_mmcba")
 
 [node name="Subject" parent="." instance=ExtResource("1_y2r04")]
 layout_mode = 1
+
+[node name="EntryLabel" parent="Subject" instance=ExtResource("3_vhjni")]
+layout_mode = 0
+
+[node name="EntryLabel2" parent="Subject" instance=ExtResource("3_vhjni")]
+layout_mode = 0
+
+[node name="EntryLabel3" parent="Subject" instance=ExtResource("3_vhjni")]
+layout_mode = 0
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
