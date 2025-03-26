@@ -1,9 +1,167 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlblf8nv7ygav"]
+[gd_scene load_steps=9 format=3 uid="uid://dlblf8nv7ygav"]
 
 [ext_resource type="Script" uid="uid://0sq8g2gs8khl" path="res://tests/label_properties/label_properties.gd" id="1_jqn6q"]
 [ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="1_yv13j"]
 [ext_resource type="PackedScene" uid="uid://brfh87432e853" path="res://src/entry_label.tscn" id="3_hnhdq"]
 [ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="3_jqn6q"]
+[ext_resource type="Resource" uid="uid://cxlnqihmbqic0" path="res://tests/label_properties/label_properties.tres" id="5_22hbe"]
+
+[sub_resource type="Animation" id="Animation_fh3om"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:separation_show")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:separation_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:separation_thickness")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:is_in_slice")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:entry:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:entry:weight")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_22hbe"]
+resource_name = "Test"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:separation_show")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:separation_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4, 7, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 1, 1), Color(0, 0, 1, 1), Color(0.372549, 1, 0, 0.219608), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:separation_thickness")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [3.0, 20.0, 3.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:is_in_slice")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:entry:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 0.478431, 0.807843, 1), Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:entry:weight")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 10.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fh3om"]
+_data = {
+&"RESET": SubResource("Animation_fh3om"),
+&"Test": SubResource("Animation_22hbe")
+}
 
 [node name="LabelProperties" type="Control"]
 layout_mode = 3
@@ -18,11 +176,11 @@ script = ExtResource("1_jqn6q")
 layout_mode = 1
 chart_radius_multiplier = 1.2
 
-[node name="EntryLabel4" parent="Subject" instance=ExtResource("3_hnhdq")]
+[node name="One" parent="Subject" instance=ExtResource("3_hnhdq")]
 layout_mode = 0
 theme_override_font_sizes/normal_font_size = 30
 
-[node name="EntryLabel2" type="RichTextLabel" parent="Subject"]
+[node name="Two" type="RichTextLabel" parent="Subject"]
 layout_mode = 1
 anchors_preset = -1
 offset_right = 1.0
@@ -31,7 +189,7 @@ script = ExtResource("3_jqn6q")
 separation_color = Color(0, 0, 1, 1)
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
-[node name="EntryLabel" type="RichTextLabel" parent="Subject"]
+[node name="Three" type="RichTextLabel" parent="Subject"]
 layout_mode = 0
 offset_right = 1.0
 bbcode_enabled = true
@@ -41,10 +199,19 @@ separation_color = Color(1, 0.282353, 1, 1)
 separation_thickness = 10.0
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
-[node name="EntryLabel3" type="RichTextLabel" parent="Subject"]
+[node name="Four" type="RichTextLabel" parent="Subject"]
 layout_mode = 0
 offset_right = 1.0
 theme_override_font_sizes/normal_font_size = 25
+text = "I'm changing!"
 script = ExtResource("3_jqn6q")
+entry = ExtResource("5_22hbe")
 separation_show = false
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Subject"]
+root_node = NodePath("../Four")
+libraries = {
+&"": SubResource("AnimationLibrary_fh3om")
+}
+autoplay = "Test"

@@ -1,18 +1,17 @@
 extends Control
 
-@onready var _subject: = $Subject as PieChart
+@onready var _subject: PieChart = $Subject as PieChart
 
 var _entries: Array[PieChartEntry] = [
-	PieChartEntry.new("Red", 1, Color.RED),
-	PieChartEntry.new("Blue", 1.0, Color.BLUE)
+	PieChartEntry.new("Red", 1.0, Color.RED),
+	PieChartEntry.new("Blue", 1.0, Color.BLUE),
+	null
 ]
 
 func _ready() -> void:
-	_subject.entries_array = _entries
+	_subject.set_up_labels(_entries, [])
 
 func _on_timer_timeout() -> void:
-	if _entries.size() == 3:
-		_entries.pop_back()
-	elif _entries.size() == 2:
-		_entries.push_back(PieChartEntry.new("Green", 1.0, Color.GREEN))
-	_subject.entries_array = _entries
+	var third_entry: PieChartEntry = PieChartEntry.new("Green", 1.0, Color.GREEN)
+	_entries[2] = third_entry if (_entries[2] == null) else null
+	_subject.set_up_labels(_entries, [])

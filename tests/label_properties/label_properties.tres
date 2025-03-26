@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PieChartEntry" load_steps=2 format=3 uid="uid://cxlnqihmbqic0"]
+
+[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="1_gdpl7"]
+
+[resource]
+script = ExtResource("1_gdpl7")
+name = "Four"
+weight = 1.0
+color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"

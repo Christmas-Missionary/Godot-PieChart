@@ -2,7 +2,7 @@ extends Control
 
 func _ready() -> void:
 	var entries: PieChartEntryQuickPack = PieChartEntryQuickPack.new(
-		{"One" : 1.0, "Two" : 1.0, "Three" : 1.0, "Four" : 1.0},
+		{"One" : 1.0, "Two" : 1.0, "Three" : 1.0},
 		PieChartEntryQuickPack.COLOR_SCALE.GREY_SCALE
 	)
 	var strings: Array[String] = [

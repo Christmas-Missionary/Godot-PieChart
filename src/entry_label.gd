@@ -1,11 +1,19 @@
-class_name EntryLabel extends RichTextLabel
+class_name PieChartEntryLabel extends RichTextLabel
 
 signal property_changed
+
+@export var text_format: String:
+	set(val):
+		text_format = val
+		property_changed.emit()
 
 @export var entry: PieChartEntry:
 	set(val):
 		entry = val
 		property_changed.emit()
+	get():
+		property_changed.emit()
+		return entry
 
 @export var is_in_slice: bool:
 	set(val):
@@ -34,6 +42,6 @@ func _ready() -> void:
 	assert(err == 0, "Couldn't connect signals!")
 
 func set_itself(percentage: float, center_pos: Vector2) -> void:
-	text = text.replace("%n", entry.name).replace("%w", "%.2f\n" % entry.weight).replace("%p", "%.2f%%\n" % percentage).replace("%%", "%")
+	text = text_format.replace("%n", entry.name).replace("%w", "%.2f\n" % entry.weight).replace("%p", "%.2f%%\n" % percentage).replace("%%", "%")
 	size = Vector2(get_content_width() + 10, get_content_height() + 10)
 	position = center_pos - (size / 2)
