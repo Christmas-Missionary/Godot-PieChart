@@ -26,25 +26,6 @@ func with_parent_as(node: Node) -> PieChart:
 	return self
 
 ## Not used by src directly
-static func entry_quick_pack_to_arr(quick_pack: PieChartEntryQuickPack) -> Array[PieChartEntry]:
-	var names: Array[String] = quick_pack.values.keys() as Array[String]
-	var weights: Array[float] = quick_pack.values.values() as Array[float]
-	var color_rate: Color
-	
-	match quick_pack.color_scale:
-		PieChartEntryQuickPack.COLOR_SCALE.GREY_SCALE:
-			color_rate = Color.from_rgba8(50, 50, 50)
-	
-	var res: Array[PieChartEntry]
-	var err: int = res.resize(quick_pack.values.size())
-	assert(err == Error.OK, "Something horribly wrong has happened!")
-	var color_generated: Color = Color.BLACK
-	for i: int in quick_pack.values.size():
-		res[i] = PieChartEntry.new(names[i], weights[i], color_generated)
-		color_generated += color_rate
-	return res
-
-## Not used by src directly
 func set_up_labels(entries: Array[PieChartEntry], text: Array[String] = []) -> void:
 	var children: Array[PieChartEntryLabel] = get_entry_labels()
 	for i: int in mini(children.size(), text.size()):
