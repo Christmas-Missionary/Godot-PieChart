@@ -1,0 +1,115 @@
+[gd_scene load_steps=11 format=3 uid="uid://cafe0sdub6es5"]
+
+[ext_resource type="Script" uid="uid://biulhvvte3dvh" path="res://src/pie_chart.gd" id="1_fqixq"]
+[ext_resource type="PackedScene" uid="uid://brfh87432e853" path="res://src/entry_label.tscn" id="2_3hpfd"]
+[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="3_87oov"]
+
+[sub_resource type="Resource" id="Resource_23jpq"]
+script = ExtResource("3_87oov")
+name = "One"
+weight = 1.0
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_87oov"]
+script = ExtResource("3_87oov")
+name = "Two"
+weight = 1.0
+color = Color(1, 1, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_jp0ya"]
+script = ExtResource("3_87oov")
+name = ""
+weight = 1.0
+color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_nhj6j"]
+script = ExtResource("3_87oov")
+name = ""
+weight = 1.0
+color = Color(0, 0, 1, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Animation" id="Animation_87oov"]
+resource_name = "Test"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:starting_offset_radians")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_23jpq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:starting_offset_radians")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23jpq"]
+_data = {
+&"RESET": SubResource("Animation_23jpq"),
+&"Test": SubResource("Animation_87oov")
+}
+
+[node name="StartingOffset" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PieChart" type="Control" parent="."]
+anchors_preset = 0
+offset_top = -15.0
+offset_right = 40.0
+offset_bottom = 25.0
+script = ExtResource("1_fqixq")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="EntryLabel" parent="PieChart" instance=ExtResource("2_3hpfd")]
+layout_mode = 0
+text_format = "Weeeeeeee"
+entry = SubResource("Resource_23jpq")
+separation_show = false
+
+[node name="EntryLabel2" parent="PieChart" instance=ExtResource("2_3hpfd")]
+layout_mode = 0
+entry = SubResource("Resource_87oov")
+separation_show = false
+
+[node name="EntryLabel3" parent="PieChart" instance=ExtResource("2_3hpfd")]
+layout_mode = 0
+entry = SubResource("Resource_jp0ya")
+separation_show = false
+
+[node name="EntryLabel4" parent="PieChart" instance=ExtResource("2_3hpfd")]
+layout_mode = 0
+entry = SubResource("Resource_nhj6j")
+separation_show = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PieChart"]
+libraries = {
+&"": SubResource("AnimationLibrary_23jpq")
+}
+autoplay = "Test"
+speed_scale = 0.5

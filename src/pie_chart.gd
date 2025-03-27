@@ -3,8 +3,14 @@ class_name PieChart extends Control
 @export_group("Slices")
 @export_range(0, 10) var chart_radius_multiplier: float = 1.0: 
 	set(val):
-		assert(chart_radius_multiplier >= 0, "Someone changed the range of `chart_radius_multiplier` in PieChart!")
+		assert(chart_radius_multiplier >= 0 && chart_radius_multiplier <= 10, "Someone changed the range of `chart_radius_multiplier` in PieChart!")
 		chart_radius_multiplier = val
+		queue_redraw()
+
+@export_range(0, TAU) var starting_offset_radians: float:
+	set(val):
+		assert(starting_offset_radians >= 0 && starting_offset_radians <= (TAU + 0.1), "Someone changed the range of `starting_offset_radians` in PieChart!")
+		starting_offset_radians = val
 		queue_redraw()
 
 static func new_with_labels(num_of_labels: int, with_title: bool) -> PieChart:
@@ -88,7 +94,7 @@ func _draw() -> void:
 	var hundredth_of_total: float = _weight_sum(label_nodes) * 0.01
 	var center: Vector2 = size / 2
 	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier
-	var begin_rads: float = 0
+	var begin_rads: float = starting_offset_radians
 	for label: PieChartEntryLabel in label_nodes:
 		if label.entry == null:
 			continue
