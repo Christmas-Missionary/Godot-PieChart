@@ -34,8 +34,8 @@ func set_up_labels(entries: Array[PieChartEntry], text: Array[String] = []) -> v
 		children[i].entry = entries[i]
 	queue_redraw()
 
-func _init() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+func _ready() -> void:
+	set_anchors_preset(Control.PRESET_FULL_RECT, true)
 
 # find number of points/sides needed for perfect circle
 func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
