@@ -2,11 +2,6 @@ class_name PieChartEntryLabel extends RichTextLabel
 
 signal property_changed
 
-@export var text_format: String:
-	set(val):
-		text_format = val
-		property_changed.emit()
-
 @export var entry: PieChartEntry:
 	set(val):
 		entry = val
@@ -14,6 +9,16 @@ signal property_changed
 	get():
 		property_changed.emit()
 		return entry
+
+@export var text_format: String:
+	set(val):
+		text_format = val
+		property_changed.emit()
+
+@export var disabled: bool:
+	set(val):
+		disabled = val
+		property_changed.emit()
 
 @export var is_in_slice: bool:
 	set(val):
