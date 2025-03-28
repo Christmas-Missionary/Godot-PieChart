@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://uio054y101n1"]
-
-[ext_resource type="Script" uid="uid://dx32qbwjcy3qi" path="res://src/circle_drawer.gd" id="1_vqoy4"]
-
-[node name="CircleDrawer" type="Node2D"]
-show_behind_parent = true
-script = ExtResource("1_vqoy4")
