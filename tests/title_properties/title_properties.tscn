@@ -1,17 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ci3abwvh7m8kv"]
+[gd_scene load_steps=6 format=3 uid="uid://ci3abwvh7m8kv"]
 
-[ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="1_7rkng"]
 [ext_resource type="Theme" uid="uid://durdnexxu27mc" path="res://tests/theme.tres" id="1_46qje"]
-[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="3_ef4hj"]
 [ext_resource type="PackedScene" uid="uid://bpb4wdjkwd08" path="res://src/title_label.tscn" id="4_46qje"]
-[ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="4_aonbn"]
-
-[sub_resource type="Resource" id="Resource_aonbn"]
-script = ExtResource("3_ef4hj")
-name = "I'm a label."
-weight = 1.0
-color = Color(1, 1, 1, 1)
-metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
 
 [sub_resource type="Animation" id="Animation_46qje"]
 length = 0.001
@@ -22,7 +12,7 @@ length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Subject/TitleLabel:circle_color")
+tracks/0/path = NodePath("TitleLabel:circle_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -34,7 +24,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Subject/TitleLabel:circle_radius")
+tracks/1/path = NodePath("TitleLabel:circle_radius")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -46,7 +36,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Subject/TitleLabel:bbcode_enabled")
+tracks/2/path = NodePath("TitleLabel:bbcode_enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -58,7 +48,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Subject/TitleLabel:visible")
+tracks/3/path = NodePath("TitleLabel:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -83,22 +73,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_46qje")
 
-[node name="Subject" parent="." instance=ExtResource("1_7rkng")]
-layout_mode = 1
-
-[node name="TitleLabel" parent="Subject" instance=ExtResource("4_46qje")]
+[node name="TitleLabel" parent="." instance=ExtResource("4_46qje")]
 clip_contents = false
 layout_mode = 1
 text = "[wave]Test"
-
-[node name="PieChartEntryLabel" type="RichTextLabel" parent="Subject"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("4_aonbn")
-entry = SubResource("Resource_aonbn")
-separation_show = false
-metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

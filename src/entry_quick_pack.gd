@@ -18,9 +18,26 @@ func to_array() -> Array[PieChartEntry]:
 	var weights: Array[float] = values.values() as Array[float]
 	var res: Array[PieChartEntry]
 	var err: int = res.resize(values.size())
-	assert(err == Error.OK, "Something horribly wrong has happened!")
+	assert(err == Error.OK, "Array couldn't be resized!")
 	var color_generated: Color = starting_color
 	for i: int in values.size():
 		res[i] = PieChartEntry.new(names[i], weights[i], color_generated)
+		@warning_ignore("unsafe_cast")
+		color_generated = color_changer.call(color_generated) as Color
+	return res
+
+func with_formatting(formatting: Array[String]) -> Dictionary[PieChartEntry, String]:
+	if (color_changer.call(starting_color) is not Color):
+		push_error("Color Changer does NOT return a color!")
+		return {}
+	assert(formatting.size() == values.size(), "Sizes of the number of strings in `formatting` is not the same as the number of the property `values`!")
+	
+	var names: Array[String] = values.keys() as Array[String]
+	var weights: Array[float] = values.values() as Array[float]
+	var res: Dictionary[PieChartEntry, String]
+	var color_generated: Color = starting_color
+	for i: int in values.size():
+		res[PieChartEntry.new(names[i], weights[i], color_generated)] = formatting[i]
+		@warning_ignore("unsafe_cast")
 		color_generated = color_changer.call(color_generated) as Color
 	return res

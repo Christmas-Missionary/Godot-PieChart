@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cau6p7h27p4ic"]
+[gd_scene load_steps=2 format=3 uid="uid://cau6p7h27p4ic"]
 
 [ext_resource type="Script" uid="uid://cqrnu1rkid3vl" path="res://tests/color_callable/color_callable.gd" id="1_jr0sy"]
-[ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="2_q65yv"]
-[ext_resource type="PackedScene" uid="uid://brfh87432e853" path="res://src/entry_label.tscn" id="3_tq7jn"]
 
 [node name="ColorCallable" type="Control"]
 layout_mode = 3
@@ -12,29 +10,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jr0sy")
-
-[node name="Subject" parent="." instance=ExtResource("2_q65yv")]
-layout_mode = 1
-chart_radius_multiplier = 2.0
-
-[node name="EntryLabel" parent="Subject" instance=ExtResource("3_tq7jn")]
-layout_mode = 0
-separation_show = false
-
-[node name="EntryLabel2" parent="Subject" instance=ExtResource("3_tq7jn")]
-layout_mode = 0
-separation_show = false
-
-[node name="EntryLabel3" parent="Subject" instance=ExtResource("3_tq7jn")]
-layout_mode = 0
-separation_show = false
-
-[node name="EntryLabel4" parent="Subject" instance=ExtResource("3_tq7jn")]
-layout_mode = 0
-separation_show = false
-
-[node name="EntryLabel5" parent="Subject" instance=ExtResource("3_tq7jn")]
-layout_mode = 0
-separation_show = false
 
 [connection signal="ready" from="." to="." method="_set_up"]

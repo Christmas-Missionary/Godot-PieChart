@@ -33,13 +33,18 @@ signal property_changed
 
 @export_range(0, 1000) var separation_thickness: float = 3.0:
 	set(val):
-		assert(separation_thickness >= 0, "Someone changed the range of `separation_thickness` in PieChart!")
 		separation_thickness = val
 		property_changed.emit()
 
 func _ready() -> void:
-	var err: int = property_changed.connect((get_parent() as CanvasItem).queue_redraw)
-	assert(err == 0, "Couldn't connect signals!")
+	assert((get_parent() as PieChart) != null, "Parent is not a PieChart!")
+	var err: int = property_changed.connect((get_parent() as PieChart).queue_redraw)
+	assert(err == Error.OK, "Couldn't connect signal!")
+
+func set_entry_and_format(_entry: PieChartEntry, format: String) -> PieChartEntryLabel:
+	entry = _entry
+	text_format = format
+	return self
 
 func set_itself(percentage: float, center_pos: Vector2) -> void:
 	text = text_format.replace("%n", entry.name).replace("%w", "%.2f\n" % entry.weight).replace("%p", "%.2f%%\n" % percentage).replace("%%", "%")

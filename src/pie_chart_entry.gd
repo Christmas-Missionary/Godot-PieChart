@@ -5,7 +5,7 @@ class_name PieChartEntry extends Resource
 @export var color: Color
 
 func _init(name_: String = "", weight_: float = 0.0, color_: Color = Color.BLACK) -> void:
-	assert(weight >= 0.0, "Someone changed the range of `weight` in PieChartEntry!")
+	assert(signf(weight_) != -1, "The `weight` from a PieChartEntry is NOT supposed to be negative!")
 	name = name_
 	weight = weight_
 	color = color_
