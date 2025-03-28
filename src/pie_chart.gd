@@ -58,7 +58,7 @@ func get_entry_labels() -> Array[PieChartEntryLabel]:
 	return res
 
 func _draw() -> void:
-	var label_nodes: Array[PieChartEntryLabel] = get_entry_labels()
+	var label_nodes: Array[PieChartEntryLabel] = get_entry_labels().filter(func(label: PieChartEntryLabel) -> bool: return !label.disabled) as Array[PieChartEntryLabel]
 	if label_nodes.size() == 0:
 		push_error("PieChart must have at least one child of type PieChartEntryLabel to work!")
 		return
@@ -67,7 +67,7 @@ func _draw() -> void:
 	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier
 	var begin_rads: float = starting_offset_radians
 	for label: PieChartEntryLabel in label_nodes:
-		if label.entry == null:
+		if label.disabled or label.entry == null:
 			continue
 		var percentage: float = label.entry.weight / hundredth_of_total
 		var rads_from_begin_angle: float = percentage * 0.0628318530717959 # TAU / 100.0 = 0.0628318530717959
