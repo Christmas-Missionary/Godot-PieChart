@@ -32,6 +32,21 @@ weight = 1.0
 color = Color(0, 0, 1, 1)
 metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
 
+[sub_resource type="Animation" id="Animation_23jpq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:starting_offset_radians")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_87oov"]
 resource_name = "Test"
 length = 2.0
@@ -47,21 +62,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 6.28319]
-}
-
-[sub_resource type="Animation" id="Animation_23jpq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:starting_offset_radians")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_23jpq"]
@@ -80,6 +80,8 @@ grow_vertical = 2
 
 [node name="PieChart" type="Control" parent="."]
 anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_top = -15.0
 offset_right = 40.0
 offset_bottom = 25.0

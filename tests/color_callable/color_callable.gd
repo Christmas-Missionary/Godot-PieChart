@@ -1,5 +1,7 @@
 extends Control
 
+var _pie_chart: PieChart
+
 func _unhandled_key_input(_event) -> void:
 	if Input.is_physical_key_pressed(KEY_SPACE):
 		_set_up()
@@ -10,4 +12,8 @@ func _set_up() -> void:
 		func(val: Color) -> Color: return val.lerp(Color(randf(), randf(), randf()), randf()),
 		Color(randf(), randf(), randf())
 	)
-	($Subject as PieChart).set_up_labels(pack.to_array())
+	var strings: Array[String] = []
+	var err: int = strings.resize(5)
+	assert(err == Error.OK, "Array couldn't resize!")
+	strings.fill("%n\n%p%w")
+	_pie_chart = PieChart.new_with_labels(pack.with_formatting(strings)).with_parent_as(self)
