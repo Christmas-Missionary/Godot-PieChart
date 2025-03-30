@@ -28,7 +28,7 @@ func set_entry_labels(entries_with_format: Dictionary[PieChartEntry, String]) ->
 	var formatting: Array[String] = entries_with_format.values() as Array[String]
 	var labels: Array[PieChartEntryLabel] = get_entry_labels()
 	for i: int in entries_with_format.size():
-		labels[i].set_entry_and_format(entries[i], formatting[i])
+		var _discard: PieChartEntryLabel = labels[i].set_entry_and_format(entries[i], formatting[i])
 
 func with_parent_as(node: Node) -> PieChart:
 	node.add_child(self)
@@ -53,7 +53,7 @@ func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rad
 func _weight_sum(arr: Array[PieChartEntryLabel]) -> float:
 	var res: float = 0
 	for node: PieChartEntryLabel in arr:
-		res += (0.0 if node.entry == null else node.entry.weight)
+		res += (0.0 if node.entry else node.entry.weight)
 	if is_zero_approx(res):
 		push_error("All the entries total zero!")
 	return res
@@ -62,7 +62,7 @@ func get_entry_labels() -> Array[PieChartEntryLabel]:
 	var children: Array[Node] = get_children()
 	var res: Array[PieChartEntryLabel]
 	for node: Node in children:
-		if node is PieChartEntryLabel && !node.is_queued_for_deletion():
+		if node is PieChartEntryLabel and !node.is_queued_for_deletion():
 			res.push_back(node as PieChartEntryLabel)
 	return res
 

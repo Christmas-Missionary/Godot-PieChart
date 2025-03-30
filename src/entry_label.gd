@@ -43,7 +43,7 @@ signal property_changed
 		property_changed.emit()
 
 func _ready() -> void:
-	assert((get_parent() as PieChart) != null, "Parent is not a PieChart!")
+	assert((get_parent() as PieChart), "Parent is not a PieChart!")
 	var err: int = property_changed.connect((get_parent() as PieChart).queue_redraw)
 	assert(err == Error.OK, "Couldn't connect signal!")
 
