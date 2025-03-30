@@ -2,7 +2,7 @@ extends Control
 
 var _pie_chart: PieChart
 
-func _unhandled_key_input(_event) -> void:
+func _unhandled_key_input(_event: InputEvent) -> void:
 	if Input.is_physical_key_pressed(KEY_SPACE):
 		_pie_chart.queue_free()
 		_set_up()

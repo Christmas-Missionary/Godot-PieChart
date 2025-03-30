@@ -104,9 +104,9 @@ func _ready() -> void:
 	var arr_six: PackedVector2Array = fsix(Vector2.ONE * 310, 300, 0, TAU_KINDOF, Color.WHITE, 64)
 	var arr_seven: PackedVector2Array = fseven(Vector2.ONE * 310, 300, 0, TAU_KINDOF, Color.WHITE, 64)
 	var arr_eight: PackedVector2Array = feight(Vector2.ONE * 310, 300, 0, 359.999, Color.WHITE, 64)
-	assert(arr_ori.size() == arr_one.size() && arr_one.size() == arr_two.size() && arr_one.size() == arr_three.size()
-	&& arr_one.size() == arr_four.size() && arr_one.size() == arr_five.size() &&
-	arr_one.size() == arr_six.size() && arr_one.size() == arr_seven.size() && arr_one.size() == arr_eight.size(), "Sizes do not match!")
+	assert(arr_ori.size() == arr_one.size() and arr_one.size() == arr_two.size() and arr_one.size() == arr_three.size()
+	and arr_one.size() == arr_four.size() and arr_one.size() == arr_five.size() and
+	arr_one.size() == arr_six.size() and arr_one.size() == arr_seven.size() and arr_one.size() == arr_eight.size(), "Sizes do not match!")
 	for i: int in arr_one.size():
 		#print("Original Array: ", arr_ori[i], " Difference Between 7 and original: ", arr_seven[i] - arr_ori[i])
 		print("Original array: ", arr_ori[i], " Difference Between 1 and original: ", arr_ori[i] - arr_one[i],

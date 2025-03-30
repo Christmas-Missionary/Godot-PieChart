@@ -14,7 +14,7 @@ var _drawer: Node2D = Node2D.new()
 		_drawer.queue_redraw()
 
 func _ready() -> void:
-	assert(get_parent() as Control != null, "Parent is not a Control node!")
+	assert(get_parent() as Control, "Parent is not a Control node!")
 	size = (get_parent() as Control).size
 	add_child(_drawer, false, Node.INTERNAL_MODE_FRONT)
 	_drawer.show_behind_parent = true
