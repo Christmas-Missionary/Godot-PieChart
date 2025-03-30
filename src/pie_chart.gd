@@ -53,7 +53,7 @@ func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rad
 func _weight_sum(arr: Array[PieChartEntryLabel]) -> float:
 	var res: float = 0
 	for node: PieChartEntryLabel in arr:
-		res += (0.0 if node.entry else node.entry.weight)
+		res += (0.0 if !node.entry else node.entry.weight)
 	if is_zero_approx(res):
 		push_error("All the entries total zero!")
 	return res
@@ -76,7 +76,7 @@ func _draw() -> void:
 	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier
 	var begin_rads: float = starting_offset_radians
 	for label: PieChartEntryLabel in label_nodes:
-		if label.disabled or label.entry == null:
+		if label.disabled or !label.entry:
 			continue
 		var percentage: float = label.entry.weight / hundredth_of_total
 		var rads_from_begin_angle: float = percentage * 0.0628318530717959 # TAU / 100.0 = 0.0628318530717959
