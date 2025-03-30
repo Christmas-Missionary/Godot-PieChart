@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://cafe0sdub6es5"]
+
+[ext_resource type="Script" uid="uid://dfwnnc48q7eyo" path="res://tests/pie_chart_properties/subject.gd" id="1_25jiw"]
+[ext_resource type="Script" uid="uid://cb7e18os3hcsl" path="res://tests/pie_chart_properties/entry_label.gd" id="2_ti7r4"]
+[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="3_ti7r4"]
+[ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="4_ixbmg"]
+[ext_resource type="Script" uid="uid://cq8dkpy0pphcb" path="res://tests/pie_chart_properties/rich_text_label.gd" id="4_ti7r4"]
+
+[sub_resource type="Resource" id="Resource_ma4s8"]
+script = ExtResource("3_ti7r4")
+name = ""
+weight = 1.0
+color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_ixbmg"]
+script = ExtResource("3_ti7r4")
+name = ""
+weight = 1.0
+color = Color(0, 0, 1, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_ti7r4"]
+script = ExtResource("3_ti7r4")
+name = ""
+weight = 1.0
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_5d3rh"]
+script = ExtResource("3_ti7r4")
+name = ""
+weight = 1.0
+color = Color(1, 1, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[node name="PieChartProperties" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Subject" type="Control" parent="."]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -15.0
+offset_right = 40.0
+offset_bottom = 25.0
+script = ExtResource("1_25jiw")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="1" type="RichTextLabel" parent="Subject"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_ti7r4")
+entry = SubResource("Resource_ma4s8")
+text_format = "Weeeeeeee"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="2" type="RichTextLabel" parent="Subject"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_ixbmg")
+entry = SubResource("Resource_ixbmg")
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="3" type="RichTextLabel" parent="Subject"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_ixbmg")
+entry = SubResource("Resource_ti7r4")
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="4" type="RichTextLabel" parent="Subject"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_ixbmg")
+entry = SubResource("Resource_5d3rh")
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_top = 560.0
+offset_right = 1152.0
+offset_bottom = 648.0
+max_value = 10.0
+step = 0.125
+value = 1.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 148.0
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+script = ExtResource("4_ti7r4")
+
+[connection signal="value_changed" from="HSlider" to="Subject" method="_change_factor"]
+[connection signal="value_changed" from="HSlider" to="RichTextLabel" method="_on_h_slider_value_changed"]

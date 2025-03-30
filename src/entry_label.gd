@@ -18,6 +18,7 @@ signal property_changed
 @export var disabled: bool:
 	set(val):
 		disabled = val
+		visible = !val
 		property_changed.emit()
 
 @export var is_in_slice: bool:
@@ -26,7 +27,7 @@ signal property_changed
 		property_changed.emit()
 
 @export_group("Separation", "separation_")
-@export var separation_show: bool = true:
+@export var separation_show: bool:
 	set(val):
 		separation_show = val
 		property_changed.emit()
@@ -53,5 +54,5 @@ func set_entry_and_format(_entry: PieChartEntry, format: String) -> PieChartEntr
 
 func set_itself(percentage: float, center_pos: Vector2) -> void:
 	text = text_format.replace("%n", entry.name).replace("%w", "%.2f\n" % entry.weight).replace("%p", "%.2f%%\n" % percentage).replace("%%", "%")
-	size = Vector2(get_content_width() + 10, get_content_height() + 10)
+	size = Vector2(get_content_width() + 30, get_content_height() + 30)
 	position = center_pos - (size / 2)
