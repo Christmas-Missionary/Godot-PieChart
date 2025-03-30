@@ -11,15 +11,24 @@ class_name PieChart extends Control
 		starting_offset_radians = val
 		queue_redraw()
 
-static func new_with_labels(entries_with_format: Dictionary[PieChartEntry, String], with_title: bool = false) -> PieChart:
-	var res: PieChart = PieChart.new()
+func with_labels(entries_with_format: Dictionary[PieChartEntry, String], with_title: bool = false) -> PieChart:
+	for node: Node in get_children():
+		if node is PieChartTitleLabel or node is PieChartEntryLabel:
+			node.queue_free()
 	if with_title:
-		res.add_child(PieChartTitleLabel.new())
+		add_child(PieChartTitleLabel.new())
 	var entries: Array[PieChartEntry] = entries_with_format.keys() as Array[PieChartEntry]
 	var formatting: Array[String] = entries_with_format.values() as Array[String]
 	for i: int in entries_with_format.size():
-		res.add_child(PieChartEntryLabel.new().set_entry_and_format(entries[i], formatting[i]))
-	return res
+		add_child(PieChartEntryLabel.new().set_entry_and_format(entries[i], formatting[i]))
+	return self
+
+func set_entry_labels(entries_with_format: Dictionary[PieChartEntry, String]) -> void:
+	var entries: Array[PieChartEntry] = entries_with_format.keys() as Array[PieChartEntry]
+	var formatting: Array[String] = entries_with_format.values() as Array[String]
+	var labels: Array[PieChartEntryLabel] = get_entry_labels()
+	for i: int in entries_with_format.size():
+		labels[i].set_entry_and_format(entries[i], formatting[i])
 
 func with_parent_as(node: Node) -> PieChart:
 	node.add_child(self)
@@ -79,4 +88,5 @@ func _draw() -> void:
 		if label.separation_show:
 			draw_line(center, Vector2.from_angle(begin_rads) * radius + center, label.separation_color, label.separation_thickness, true)
 		begin_rads += rads_from_begin_angle
-	draw_line(center, Vector2.from_angle(starting_offset_radians) * radius + center, label_nodes[0].separation_color, label_nodes[0].separation_thickness, true)
+	if label_nodes[0].separation_show:
+		draw_line(center, Vector2.from_angle(starting_offset_radians) * radius + center, label_nodes[0].separation_color, label_nodes[0].separation_thickness, true)

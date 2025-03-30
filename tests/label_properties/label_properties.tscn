@@ -80,6 +80,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [1.0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:text_format")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["I'm changing!"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_22hbe"]
 resource_name = "Test"
@@ -156,6 +180,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [1.0, 10.0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:text_format")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["", "I'm changing!"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fh3om"]
 _data = {
@@ -179,6 +227,7 @@ chart_radius_multiplier = 1.2
 [node name="One" parent="Subject" instance=ExtResource("3_hnhdq")]
 layout_mode = 0
 theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
 
 [node name="Two" type="RichTextLabel" parent="Subject"]
 layout_mode = 1
@@ -203,10 +252,10 @@ metadata/_custom_type_script = "uid://w8g4uchaio4c"
 layout_mode = 0
 offset_right = 1.0
 theme_override_font_sizes/normal_font_size = 25
-text = "I'm changing!"
 script = ExtResource("3_jqn6q")
 entry = ExtResource("5_22hbe")
-separation_show = false
+text_format = "I'm changing!"
+disabled = true
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Subject"]
