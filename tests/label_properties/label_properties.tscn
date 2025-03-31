@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlblf8nv7ygav"]
+[gd_scene load_steps=8 format=3 uid="uid://dlblf8nv7ygav"]
 
 [ext_resource type="Script" uid="uid://0sq8g2gs8khl" path="res://tests/label_properties/label_properties.gd" id="1_jqn6q"]
-[ext_resource type="PackedScene" uid="uid://cbux5geqj1s7n" path="res://src/pie_chart.tscn" id="1_yv13j"]
-[ext_resource type="PackedScene" uid="uid://brfh87432e853" path="res://src/entry_label.tscn" id="3_hnhdq"]
 [ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="3_jqn6q"]
 [ext_resource type="Resource" uid="uid://cxlnqihmbqic0" path="res://tests/label_properties/label_properties.tres" id="5_22hbe"]
+[ext_resource type="Script" uid="uid://biulhvvte3dvh" path="res://src/pie_chart.gd" id="5_fh3om"]
 
 [sub_resource type="Animation" id="Animation_fh3om"]
 length = 0.001
@@ -220,14 +219,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jqn6q")
 
-[node name="Subject" parent="." instance=ExtResource("1_yv13j")]
-layout_mode = 1
-chart_radius_multiplier = 1.2
+[node name="Subject" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_fh3om")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
 
-[node name="One" parent="Subject" instance=ExtResource("3_hnhdq")]
+[node name="One" type="RichTextLabel" parent="Subject"]
 layout_mode = 0
-theme_override_font_sizes/normal_font_size = 30
+offset_right = 40.0
+offset_bottom = 40.0
 bbcode_enabled = true
+script = ExtResource("3_jqn6q")
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="Two" type="RichTextLabel" parent="Subject"]
 layout_mode = 1

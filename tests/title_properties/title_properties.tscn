@@ -1,10 +1,22 @@
 [gd_scene load_steps=6 format=3 uid="uid://ci3abwvh7m8kv"]
 
-[ext_resource type="Theme" uid="uid://durdnexxu27mc" path="res://tests/theme.tres" id="1_46qje"]
-[ext_resource type="PackedScene" uid="uid://bpb4wdjkwd08" path="res://src/title_label.tscn" id="4_46qje"]
+[ext_resource type="Theme" uid="uid://durdnexxu27mc" path="res://tests/title_properties/theme.tres" id="1_46qje"]
+[ext_resource type="Script" uid="uid://dg1804s2dc2k1" path="res://src/title_label.gd" id="2_ef4hj"]
 
 [sub_resource type="Animation" id="Animation_46qje"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TitleLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_ef4hj"]
 resource_name = "Test 1"
@@ -12,14 +24,14 @@ length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TitleLabel:circle_color")
+tracks/0/path = NodePath("TitleLabel:bbcode_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 4, 7, 10),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(1, 0.415686, 0, 1), Color(0.305882, 0.882353, 0.294118, 1), Color(1, 0.0901961, 0.294118, 1), Color(1, 1, 1, 1)]
+"values": [false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -36,14 +48,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TitleLabel:bbcode_enabled")
+tracks/2/path = NodePath("TitleLabel:circle_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
+"times": PackedFloat32Array(0, 1, 4, 7, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 0.415686, 0, 1), Color(0.305882, 0.882353, 0.294118, 1), Color(1, 0.0901961, 0.294118, 1), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -52,7 +64,7 @@ tracks/3/path = NodePath("TitleLabel:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 8),
+"times": PackedFloat32Array(0, 9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -73,10 +85,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_46qje")
 
-[node name="TitleLabel" parent="." instance=ExtResource("4_46qje")]
-clip_contents = false
-layout_mode = 1
+[node name="TitleLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 text = "[wave]Test"
+script = ExtResource("2_ef4hj")
+metadata/_custom_type_script = "uid://dg1804s2dc2k1"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
