@@ -14,6 +14,8 @@ var _drawer: Node2D = Node2D.new()
 		_drawer.queue_redraw()
 
 func _ready() -> void:
+	horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	assert(get_parent() as Control, "Parent is not a Control node!")
 	size = (get_parent() as Control).size
 	add_child(_drawer, false, Node.INTERNAL_MODE_FRONT)

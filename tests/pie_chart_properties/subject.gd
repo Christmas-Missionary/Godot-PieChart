@@ -1,5 +1,7 @@
 extends PieChart
 
+@export var _rot: float = 0.02
+
 func _ready() -> void:
 	super() # <-- WARNING NOTICE CAUTION NOTE, THIS IS VITALLY IMPORTANT!!!
 	push_error("Note: When overriding `_ready` for PieChart, PieChartEntryLabel, and PieChartTitleLabel, call `super()` first!!")
@@ -10,3 +12,4 @@ func _change_factor(value: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	starting_offset_radians += 0.02
+	rotation -= _rot
