@@ -43,6 +43,8 @@ signal property_changed
 		property_changed.emit()
 
 func _ready() -> void:
+	vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	assert((get_parent() as PieChart), "Parent is not a PieChart!")
 	var err: int = property_changed.connect((get_parent() as PieChart).queue_redraw)
 	assert(err == Error.OK, "Couldn't connect signal!")
