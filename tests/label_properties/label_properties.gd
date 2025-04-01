@@ -8,7 +8,7 @@ func _ready() -> void:
 	)
 	var strings: Array[String] = [
 		"%n\n%p%w%p",
-		"[wave amp=-50]Name: %n\nWeight: %wPercentage %p%%",
+		"[wave amp=-50]Name: %n\nWeight: %wPercentage %p",
 		"[color=black]My name is %n\nand I have %p of the pie chart!",
 	]
 	($Subject as PieChart).set_entry_labels(entries.with_formatting(strings))
