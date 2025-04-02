@@ -2,10 +2,9 @@ extends Control
 
 var _pie_chart: PieChart
 
-func _unhandled_key_input(_event: InputEvent) -> void:
-	if Input.is_physical_key_pressed(KEY_SPACE):
-		_pie_chart.queue_free()
-		_set_up()
+func _on_button_pressed() -> void:
+	_pie_chart.queue_free()
+	_set_up()
 
 func _set_up() -> void:
 	const _MIN_SIZE: int = 2
@@ -24,5 +23,6 @@ func _set_up() -> void:
 	assert(err == Error.OK, "Array couldn't resize!")
 	strings.fill("%n\n%p%w")
 	_pie_chart = PieChart.new().with_labels(pack.with_formatting(strings)).with_parent_as(self)
+	_pie_chart.position.x += 100
 	for label: PieChartEntryLabel in _pie_chart.get_entry_labels().slice(randi_range(_MIN_SIZE, _MAX_SIZE)) as Array[PieChartEntryLabel]:
 		label.disabled = true

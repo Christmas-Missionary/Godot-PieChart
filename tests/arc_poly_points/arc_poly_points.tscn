@@ -16,15 +16,14 @@ process_callback = 0
 wait_time = 0.25
 autostart = true
 
-[node name="Label" type="Label" parent="."]
+[node name="CircleLabel" type="RichTextLabel" parent="."]
 texture_filter = 1
 layout_mode = 0
 offset_left = 733.0
-offset_top = 344.0
-offset_right = 775.0
-offset_bottom = 367.0
-scale = Vector2(10, 10)
-text = "3"
+offset_right = 1152.0
+offset_bottom = 567.0
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
 
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 0
@@ -33,7 +32,7 @@ offset_top = 600.0
 offset_right = 1119.0
 offset_bottom = 643.0
 min_value = 3.0
-max_value = 128.0
-value = 3.0
+max_value = 256.0
+value = 64.0
 
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
