@@ -43,6 +43,7 @@ signal property_changed
 		property_changed.emit()
 
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	assert((get_parent() as PieChart), "Parent is not a PieChart!")
