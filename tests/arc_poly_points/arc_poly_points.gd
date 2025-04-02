@@ -2,9 +2,9 @@ extends Control
 const _POS: Vector2i = Vector2i(305, 305)
 const _RADIUS: int = 300
 
-var _points: int = 3
+var _points: int = 64
 
-@onready var _label: Label = $Label as Label
+@onready var _label: RichTextLabel = $CircleLabel as RichTextLabel
 
 func draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
 	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
@@ -18,9 +18,6 @@ func draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads
 		previous_vec = previous_vec.rotated(rads_to_rotate)
 		points_arc[i] = previous_vec + center
 	draw_colored_polygon(points_arc, color)
-
-func _ready() -> void:
-	_label.text = str(_points)
 
 func _draw() -> void:
 	const TAU_KINDOF: float = 6.28317
@@ -37,9 +34,8 @@ func _draw() -> void:
 				reds += 1
 			elif color == Color.WHITE:
 				whites += 1
-	print(_points, " points -> (", whites, " whites, ", reds, " reds), -> ", (whites * 100.0) / (whites + reds), "% of all pixels in circle are white.")
+	_label.text = ("" if reds else "[color=green]") + "%d points\n%d white\n%d red\n%.3f%% pixels in circle are white." % [_points, whites, reds, (whites * 100.0) / (whites + reds)]
 
 func _on_h_slider_value_changed(value: float) -> void:
 	_points = int(value)
-	_label.text = str(_points)
 	queue_redraw()
