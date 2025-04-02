@@ -11,6 +11,19 @@ class_name PieChart extends Control
 		starting_offset_radians = val
 		queue_redraw()
 
+static func circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, number_of_points: int) -> PackedVector2Array:
+	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
+	var rads_to_rotate: float = (rads_to - rads_from) / number_of_points
+	var res: PackedVector2Array
+	var err: int = res.resize(number_of_points + 2)
+	assert(err == Error.OK, "Array couldn't be resized!")
+	res[0] = center
+	res[1] = previous_vec + center
+	for i: int in range(2, number_of_points + 2):
+		previous_vec = previous_vec.rotated(rads_to_rotate)
+		res[i] = previous_vec + center
+	return res
+
 func with_labels(entries_with_format: Dictionary[PieChartEntry, String], with_title: bool = false) -> PieChart:
 	for node: Node in get_children():
 		if node is PieChartTitleLabel or node is PieChartEntryLabel:
@@ -34,23 +47,6 @@ func with_parent_as(node: Node) -> PieChart:
 	node.add_child(self)
 	return self
 
-func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	set_anchors_preset(Control.PRESET_FULL_RECT, true)
-
-func _draw_circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, color: Color, number_of_points: int) -> void:
-	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
-	var rads_to_rotate: float = (rads_to - rads_from) / number_of_points
-	var points_arc: PackedVector2Array
-	var err: int = points_arc.resize(number_of_points + 2)
-	assert(err == Error.OK, "Array couldn't be resized!")
-	points_arc[0] = center
-	points_arc[1] = previous_vec + center
-	for i: int in range(2, number_of_points + 2):
-		previous_vec = previous_vec.rotated(rads_to_rotate)
-		points_arc[i] = previous_vec + center
-	draw_colored_polygon(points_arc, color)
-
 func _weight_sum(arr: Array[PieChartEntryLabel]) -> float:
 	var res: float = 0
 	for node: PieChartEntryLabel in arr:
@@ -60,12 +56,21 @@ func _weight_sum(arr: Array[PieChartEntryLabel]) -> float:
 	return res
 
 func get_entry_labels() -> Array[PieChartEntryLabel]:
-	var children: Array[Node] = get_children()
 	var res: Array[PieChartEntryLabel]
-	for node: Node in children:
+	for node: Node in get_children():
 		if node is PieChartEntryLabel and !node.is_queued_for_deletion():
 			res.push_back(node as PieChartEntryLabel)
 	return res
+
+func get_title_label() -> PieChartTitleLabel:
+	for node: Node in get_children():
+		if node is PieChartTitleLabel and !node.is_queued_for_deletion():
+			return node as PieChartTitleLabel
+	return null
+
+func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	set_anchors_preset(Control.PRESET_FULL_RECT, true)
 
 func _draw() -> void:
 	var label_nodes: Array[PieChartEntryLabel] = get_entry_labels().filter(func(label: PieChartEntryLabel) -> bool: return !label.disabled) as Array[PieChartEntryLabel]
@@ -81,7 +86,7 @@ func _draw() -> void:
 			continue
 		var percentage: float = label.entry.weight / hundredth_of_total
 		var rads_from_begin_angle: float = percentage * 0.0628318530717959 # TAU / 100.0 = 0.0628318530717959
-		_draw_circle_arc_poly(center, radius, begin_rads, begin_rads + rads_from_begin_angle, label.entry.color, ceili(0.64 * percentage)) # 64 / 100.0 = 0.64
+		draw_colored_polygon(circle_arc_poly(center, radius, begin_rads, begin_rads + rads_from_begin_angle, ceili(0.64 * percentage)), label.entry.color) # 64 / 100.0 = 0.64
 		var label_angle_point: Vector2 = Vector2.from_angle(rads_from_begin_angle + begin_rads - (rads_from_begin_angle / 2)) * radius
 		label.set_itself(percentage, label_angle_point * (0.5 if label.is_in_slice else 1.6) + center)
 		if label.text != "" and !label.is_in_slice:
