@@ -1,0 +1,384 @@
+[gd_scene load_steps=24 format=3 uid="uid://dfbqgik8fs5dq"]
+
+[ext_resource type="Script" uid="uid://biulhvvte3dvh" path="res://src/pie_chart.gd" id="1_blwj6"]
+[ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="2_48n3t"]
+[ext_resource type="Script" uid="uid://dg1804s2dc2k1" path="res://src/title_label.gd" id="2_mikei"]
+[ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="3_cwrmx"]
+[ext_resource type="Script" uid="uid://beu3jgr4cm41g" path="res://examples/camera_2d.gd" id="5_hlds0"]
+[ext_resource type="Script" uid="uid://blpjkdrqo3k0" path="res://examples/pin_wheel.gd" id="5_vc52x"]
+[ext_resource type="Script" uid="uid://dbuuearuhusmo" path="res://examples/filler.gd" id="6_ylda1"]
+
+[sub_resource type="Resource" id="Resource_mmydx"]
+script = ExtResource("3_cwrmx")
+name = "Dogs"
+weight = 28.0
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_nun71"]
+script = ExtResource("3_cwrmx")
+name = "Cats"
+weight = 22.0
+color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_w5fkn"]
+script = ExtResource("3_cwrmx")
+name = "Fish"
+weight = 9.0
+color = Color(1, 1, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_eamrx"]
+script = ExtResource("3_cwrmx")
+name = "Birds"
+weight = 19.0
+color = Color(0, 0, 1, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_eaoql"]
+script = ExtResource("3_cwrmx")
+name = "Orange"
+weight = 1.0
+color = Color(1, 0.498039, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_mikei"]
+script = ExtResource("3_cwrmx")
+name = "RIM"
+weight = 39.0
+color = Color(0, 0.803922, 1, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_hlds0"]
+script = ExtResource("3_cwrmx")
+name = "Apple"
+weight = 19.5
+color = Color(0.364706, 1, 0.235294, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_cwrmx"]
+script = ExtResource("3_cwrmx")
+name = "Palm"
+weight = 9.8
+color = Color(1, 0.764706, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_vc52x"]
+script = ExtResource("3_cwrmx")
+name = "Motorola"
+weight = 7.4
+color = Color(1, 0.168627, 0.160784, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_ylda1"]
+script = ExtResource("3_cwrmx")
+name = "Nokia"
+weight = 3.1
+color = Color(0.956863, 0, 1, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_ncpv8"]
+script = ExtResource("3_cwrmx")
+name = "Other"
+weight = 21.2
+color = Color(0.447059, 0, 0.913725, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_okxuy"]
+script = ExtResource("3_cwrmx")
+name = "Tobwaan Kiribati"
+weight = 33.0
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_235p2"]
+script = ExtResource("3_cwrmx")
+name = "Boutokaan Kiribati Moa"
+weight = 8.0
+color = Color(0, 0, 1, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_nqdee"]
+script = ExtResource("3_cwrmx")
+name = "Independents"
+weight = 4.0
+color = Color(0.5, 0.5, 0.5, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_iw1rp"]
+script = ExtResource("3_cwrmx")
+name = ""
+weight = 0.0
+color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_erlsc"]
+script = ExtResource("3_cwrmx")
+name = ""
+weight = 0.0
+color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[node name="Examples" type="ColorRect"]
+offset_right = 2400.0
+offset_bottom = 1200.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 600.0
+theme_override_font_sizes/normal_font_size = 90
+bbcode_enabled = true
+text = "[tornado radius=9][center]
+Use Arrow keys to move around"
+
+[node name="FavoritePet" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 600.0
+offset_right = 1200.0
+offset_bottom = 600.0
+script = ExtResource("1_blwj6")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="Title" type="RichTextLabel" parent="FavoritePet"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[color=black]What is your
+favorite pet?"
+script = ExtResource("2_mikei")
+circle_color = Color(1, 1, 1, 1)
+circle_radius = 40.0
+metadata/_custom_type_script = "uid://dg1804s2dc2k1"
+
+[node name="2" type="RichTextLabel" parent="FavoritePet"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_mmydx")
+text_format = "%n
+%p%w"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="3" type="RichTextLabel" parent="FavoritePet"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_nun71")
+text_format = "%n
+%p%w"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="4" type="RichTextLabel" parent="FavoritePet"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_w5fkn")
+text_format = "%n
+%p%w"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="5" type="RichTextLabel" parent="FavoritePet"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_eamrx")
+text_format = "%n
+%p%w"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="6" type="RichTextLabel" parent="FavoritePet"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_eaoql")
+text_format = "%n
+%p%w"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="PhoneMarketshare" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1200.0
+offset_right = 1800.0
+offset_bottom = 600.0
+script = ExtResource("1_blwj6")
+starting_offset_radians = 4.713
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="Title" type="RichTextLabel" parent="PhoneMarketshare"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 12
+text = "U.S. Smartphone
+Marketshare 2008"
+script = ExtResource("2_mikei")
+circle_radius = 60.0
+metadata/_custom_type_script = "uid://dg1804s2dc2k1"
+
+[node name="1" type="RichTextLabel" parent="PhoneMarketshare"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_mikei")
+text_format = "%n
+%p"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="2" type="RichTextLabel" parent="PhoneMarketshare"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_hlds0")
+text_format = "%n
+%p"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="3" type="RichTextLabel" parent="PhoneMarketshare"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_cwrmx")
+text_format = "%n
+%p"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="4" type="RichTextLabel" parent="PhoneMarketshare"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_vc52x")
+text_format = "%n
+%p"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="5" type="RichTextLabel" parent="PhoneMarketshare"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_ylda1")
+text_format = "%n
+%p"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="6" type="RichTextLabel" parent="PhoneMarketshare"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_ncpv8")
+text_format = "%n
+%p"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="Kiribati" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 600.0
+offset_right = 600.0
+offset_bottom = 1200.0
+script = ExtResource("1_blwj6")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="Title" type="RichTextLabel" parent="Kiribati"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "House of Assembly
+in Kiribati
+December 2024"
+script = ExtResource("2_mikei")
+circle_radius = 80.0
+metadata/_custom_type_script = "uid://dg1804s2dc2k1"
+
+[node name="1" type="RichTextLabel" parent="Kiribati"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_okxuy")
+text_format = "%n
+%w members"
+display_weight_as_integer = true
+separation_show = true
+separation_color = Color(0.9, 0, 0, 1)
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="2" type="RichTextLabel" parent="Kiribati"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_235p2")
+text_format = "%n
+%w members"
+display_weight_as_integer = true
+separation_show = true
+separation_color = Color(0, 0, 0.9, 1)
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="3" type="RichTextLabel" parent="Kiribati"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_nqdee")
+text_format = "%n
+%w members"
+display_weight_as_integer = true
+separation_show = true
+separation_color = Color(0.4, 0.4, 0.4, 1)
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="PinWheel" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 600.0
+offset_top = 600.0
+offset_right = 1200.0
+offset_bottom = 1200.0
+script = ExtResource("5_vc52x")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="Filler" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1800.0
+offset_right = 2400.0
+offset_bottom = 600.0
+script = ExtResource("6_ylda1")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="1" type="RichTextLabel" parent="Filler"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_iw1rp")
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="2" type="RichTextLabel" parent="Filler"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_erlsc")
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+limit_left = 0
+limit_top = 0
+script = ExtResource("5_hlds0")

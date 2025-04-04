@@ -14,7 +14,7 @@ var _drawer: Node2D = Node2D.new()
 		_drawer.queue_redraw()
 
 func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	mouse_filter = Control.MOUSE_FILTER_PASS
 	horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	assert(get_parent() as Control, "Parent is not a Control node!")
