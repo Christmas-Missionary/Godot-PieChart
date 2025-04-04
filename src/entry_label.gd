@@ -10,9 +10,14 @@ signal property_changed
 		property_changed.emit()
 		return entry
 
-@export var text_format: String:
+@export_multiline var text_format: String:
 	set(val):
 		text_format = val
+		property_changed.emit()
+
+@export var display_weight_as_integer: bool:
+	set(val):
+		display_weight_as_integer = val
 		property_changed.emit()
 
 @export var disabled: bool:
@@ -43,7 +48,8 @@ signal property_changed
 		property_changed.emit()
 
 func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	autowrap_mode = TextServer.AUTOWRAP_WORD
+	mouse_filter = Control.MOUSE_FILTER_PASS
 	vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	assert((get_parent() as PieChart), "Parent is not a PieChart!")
@@ -56,6 +62,6 @@ func set_entry_and_format(_entry: PieChartEntry, format: String) -> PieChartEntr
 	return self
 
 func set_itself(percentage: float, center_pos: Vector2) -> void:
-	text = text_format.replace("%n", entry.name).replace("%w", "%.2f\n" % entry.weight).replace("%p", "%.2f%%\n" % percentage).replace("%%", "%")
+	text = text_format.replace("%n", entry.name).replace("%w", ("%.0f\n" if display_weight_as_integer else "%.2f\n") % entry.weight).replace("%p", "%.2f%%\n" % percentage).replace("%%", "%")
 	size = Vector2(get_content_width() + 30, get_content_height() + 30)
 	position = center_pos - (size / 2)

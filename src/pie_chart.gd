@@ -50,7 +50,7 @@ func with_parent_as(node: Node) -> PieChart:
 func _weight_sum(arr: Array[PieChartEntryLabel]) -> float:
 	var res: float = 0
 	for node: PieChartEntryLabel in arr:
-		res += (0.0 if !node.entry else node.entry.weight)
+		res += (0.0 if !node.entry or node.entry.weight <= 0.0 else node.entry.weight)
 	if is_zero_approx(res):
 		push_error("All the entries total zero!")
 	return res
@@ -69,8 +69,7 @@ func get_title_label() -> PieChartTitleLabel:
 	return null
 
 func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	set_anchors_preset(Control.PRESET_FULL_RECT, true)
+	mouse_filter = Control.MOUSE_FILTER_PASS
 
 func _draw() -> void:
 	var label_nodes: Array[PieChartEntryLabel] = get_entry_labels().filter(func(label: PieChartEntryLabel) -> bool: return !label.disabled) as Array[PieChartEntryLabel]
@@ -82,7 +81,7 @@ func _draw() -> void:
 	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier
 	var begin_rads: float = starting_offset_radians
 	for label: PieChartEntryLabel in label_nodes:
-		if label.disabled or !label.entry:
+		if label.disabled or !label.entry or label.entry.weight <= 0:
 			continue
 		var percentage: float = label.entry.weight / hundredth_of_total
 		var rads_from_begin_angle: float = percentage * 0.0628318530717959 # TAU / 100.0 = 0.0628318530717959
