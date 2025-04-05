@@ -72,7 +72,7 @@ func get_title_label() -> PieChartTitleLabel:
 	return null
 
 func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_PASS
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _draw() -> void:
 	var label_nodes: Array[PieChartEntryLabel] = get_entry_labels().filter(func(label: PieChartEntryLabel) -> bool: return !label.disabled) as Array[PieChartEntryLabel]

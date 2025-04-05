@@ -24,5 +24,6 @@ func _set_up() -> void:
 	strings.fill("%n\n%p%w")
 	_pie_chart = PieChart.new().with_labels(pack.with_formatting(strings)).with_parent_as(self)
 	_pie_chart.position.x += 100
+	_pie_chart.set_anchors_preset(Control.PRESET_FULL_RECT, true)
 	for label: PieChartEntryLabel in _pie_chart.get_entry_labels().slice(randi_range(_MIN_SIZE, _MAX_SIZE)) as Array[PieChartEntryLabel]:
 		label.disabled = true
