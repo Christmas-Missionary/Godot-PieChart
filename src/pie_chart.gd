@@ -43,6 +43,9 @@ func set_entry_labels(entries_with_format: Dictionary[PieChartEntry, String]) ->
 	for i: int in entries_with_format.size():
 		var _discard: PieChartEntryLabel = labels[i].set_entry_and_format(entries[i], formatting[i])
 
+func get_chart_radius() -> float:
+	return (minf(size.x, size.y) / 4) * chart_radius_multiplier
+
 func with_parent_as(node: Node) -> PieChart:
 	node.add_child(self)
 	return self
@@ -78,7 +81,7 @@ func _draw() -> void:
 		return
 	var hundredth_of_total: float = _weight_sum(label_nodes) * 0.01
 	var center: Vector2 = size / 2
-	var radius: float = (minf(size.x, size.y) / 4) * chart_radius_multiplier
+	var radius: float = get_chart_radius()
 	var begin_rads: float = starting_offset_radians
 	for label: PieChartEntryLabel in label_nodes:
 		if label.disabled or !label.entry or label.entry.weight <= 0:

@@ -13,6 +13,11 @@ var _drawer: Node2D = Node2D.new()
 		circle_radius = val
 		_drawer.queue_redraw()
 
+func set_label(text_: String, color: Color, radius: float) -> void:
+	text = text_
+	circle_color = color
+	circle_radius = radius
+
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
