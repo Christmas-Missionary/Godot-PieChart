@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("1_jr0sy")
 
 [node name="Button" type="Button" parent="."]
@@ -19,7 +19,7 @@ offset_top = 200.0
 offset_right = 250.0
 offset_bottom = 400.0
 mouse_filter = 1
-text = "Random Pie Chart!"
+text = "Press here for random Pie Chart!"
 
 [connection signal="ready" from="." to="." method="_set_up"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
