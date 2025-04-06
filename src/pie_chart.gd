@@ -6,7 +6,7 @@ class_name PieChart extends Control
 		chart_radius_multiplier = val
 		queue_redraw()
 
-@export_range(0, TAU) var starting_offset_radians: float:
+@export_range(0, TAU) var starting_offset_radians: float = 0.0:
 	set(val):
 		starting_offset_radians = val
 		queue_redraw()

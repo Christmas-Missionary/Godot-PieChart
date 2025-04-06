@@ -2,7 +2,7 @@ class_name PieChartEntryLabel extends RichTextLabel
 
 signal property_changed
 
-@export var entry: PieChartEntry:
+@export var entry: PieChartEntry = null:
 	set(val):
 		entry = val
 		property_changed.emit()
@@ -10,29 +10,29 @@ signal property_changed
 		property_changed.emit()
 		return entry
 
-@export_multiline var text_format: String:
+@export_multiline var text_format: String = "":
 	set(val):
 		text_format = val
 		property_changed.emit()
 
-@export var display_weight_as_integer: bool:
+@export var display_weight_as_integer: bool = false:
 	set(val):
 		display_weight_as_integer = val
 		property_changed.emit()
 
-@export var disabled: bool:
+@export var disabled: bool = false:
 	set(val):
 		disabled = val
 		visible = !val
 		property_changed.emit()
 
-@export var is_in_slice: bool:
+@export var is_in_slice: bool = false:
 	set(val):
 		is_in_slice = val
 		property_changed.emit()
 
 @export_group("Separation", "separation_")
-@export var separation_show: bool:
+@export var separation_show: bool = false:
 	set(val):
 		separation_show = val
 		property_changed.emit()
