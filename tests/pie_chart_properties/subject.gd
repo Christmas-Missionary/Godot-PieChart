@@ -3,7 +3,6 @@ extends PieChart
 @export var _rot: float = 0.02
 
 func _ready() -> void:
-	super() # <-- WARNING NOTICE CAUTION NOTE, THIS IS VITALLY IMPORTANT!!!
 	push_error("Note: When overriding `_ready` for PieChart, PieChartEntryLabel, and PieChartTitleLabel, call `super()` first!!")
 	push_error("Note: This applies to `_draw` in PieChart as well!!")
 
