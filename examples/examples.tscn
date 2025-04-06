@@ -1,8 +1,8 @@
 [gd_scene load_steps=29 format=3 uid="uid://dfbqgik8fs5dq"]
 
 [ext_resource type="Script" uid="uid://biulhvvte3dvh" path="res://src/pie_chart.gd" id="1_blwj6"]
-[ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="2_48n3t"]
-[ext_resource type="Script" uid="uid://dg1804s2dc2k1" path="res://src/title_label.gd" id="2_mikei"]
+[ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/pie_chart_entry_label.gd" id="2_48n3t"]
+[ext_resource type="Script" uid="uid://dg1804s2dc2k1" path="res://src/pie_chart_title_label.gd" id="2_mikei"]
 [ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="3_cwrmx"]
 [ext_resource type="Script" uid="uid://beu3jgr4cm41g" path="res://examples/camera_2d.gd" id="5_hlds0"]
 [ext_resource type="FontFile" uid="uid://ox6vavxxvxwl" path="res://examples/RasterForge_Font_1_1/RasterForge.ttf" id="5_nun71"]
