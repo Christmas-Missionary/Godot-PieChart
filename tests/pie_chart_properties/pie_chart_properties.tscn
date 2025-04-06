@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dfwnnc48q7eyo" path="res://tests/pie_chart_properties/subject.gd" id="1_25jiw"]
 [ext_resource type="Script" uid="uid://cb7e18os3hcsl" path="res://tests/pie_chart_properties/entry_label.gd" id="2_ti7r4"]
 [ext_resource type="Script" uid="uid://ce13kc3ly1b1y" path="res://src/pie_chart_entry.gd" id="3_ti7r4"]
-[ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/entry_label.gd" id="4_ixbmg"]
+[ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/pie_chart_entry_label.gd" id="4_ixbmg"]
 [ext_resource type="Script" uid="uid://cq8dkpy0pphcb" path="res://tests/pie_chart_properties/rich_text_label.gd" id="4_ti7r4"]
 
 [sub_resource type="Resource" id="Resource_ma4s8"]
