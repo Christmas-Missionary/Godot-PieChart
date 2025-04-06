@@ -1,8 +1,8 @@
 class_name PieChartEntryQuickPack extends Resource
 
-@export var values: Dictionary[String, float]
-@export var color_changer: Callable
-@export var starting_color: Color
+@export var values: Dictionary[String, float] = {}
+@export var color_changer: Callable = Callable()
+@export var starting_color: Color = Color.BLACK
 
 func _init(vals: Dictionary[String, float] = {}, _color_changer: Callable = func(val: Color) -> Color: return val, _starting_color: Color = Color()) -> void:
 	values = vals

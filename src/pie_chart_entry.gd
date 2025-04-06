@@ -1,8 +1,8 @@
 class_name PieChartEntry extends Resource
 
-@export var name: String
-@export_range(0, 2 ** 64) var weight: float
-@export var color: Color
+@export var name: String = ""
+@export_range(0, 2 ** 64) var weight: float = 1.0
+@export var color: Color = Color.BLACK
 
 static func with_formatting(entries: Array[PieChartEntry], formatting: Array[String]) -> Dictionary[PieChartEntry, String]:
 	if entries.size() != formatting.size():

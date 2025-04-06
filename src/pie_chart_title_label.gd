@@ -3,12 +3,12 @@ class_name PieChartTitleLabel extends RichTextLabel
 var _drawer: Node2D = Node2D.new()
 
 @export_group("Circle", "circle_")
-@export var circle_color: Color:
+@export var circle_color: Color = Color.BLACK:
 	set(val):
 		circle_color = val
 		_drawer.queue_redraw()
 
-@export_range(0, 1000) var circle_radius: float:
+@export_range(0, 1000) var circle_radius: float = 0.0:
 	set(val):
 		circle_radius = val
 		_drawer.queue_redraw()
