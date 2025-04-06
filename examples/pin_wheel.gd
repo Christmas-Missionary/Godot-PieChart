@@ -1,7 +1,6 @@
 extends PieChart
 
 func _ready() -> void:
-	super()
 	var entries: Array[PieChartEntry] = [
 		PieChartEntry.new("", 1, Color.RED),
 		PieChartEntry.new("", 1, Color.ORANGE),

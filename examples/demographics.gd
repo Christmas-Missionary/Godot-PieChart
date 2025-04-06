@@ -25,7 +25,6 @@ var _all_entries: Array[PieChartEntryPack] = [
 var _formatting: Array[String] = ["%n\n%p", "%n\n%p", "%n\n%p"]
 
 func _ready() -> void:
-	super()
 	_set_stuff()
 
 func _on_timer_timeout() -> void:

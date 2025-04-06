@@ -6,7 +6,6 @@ var increase_chart_one: bool = true
 @onready var two: PieChartEntryLabel = $"2" as PieChartEntryLabel
 
 func _ready() -> void:
-	super()
 	one.entry = PieChartEntry.new("", 1, Color(randf(), randf(), randf()))
 	two.entry = PieChartEntry.new("", 99, Color(randf(), randf(), randf()))
 
