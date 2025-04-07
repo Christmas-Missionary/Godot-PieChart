@@ -1,7 +1,17 @@
 class_name PieChartEntryQuickPack extends Resource
+## An entry pack but you don't want to set the colors yourself. 
+##
+## This a resource where the names and weights are in a dictionary, and the colors are generated with a starting color and callable.
+## Use this if you want some sort of pattern with your colors.
 
+## A dictionary for names and weights. [b]Hopefully, you have different strings for each key![/b]
 @export var values: Dictionary[String, float] = {}
+
+## The function that changes the color for the next entry.[br][br]
+## [b]Note:[/b] It is not recommended for this to change global state, but it can depend on global state if needed.
 @export var color_changer: Callable = Callable()
+
+## The color that will be in the first element of the array.
 @export var starting_color: Color = Color.BLACK
 
 func _init(vals: Dictionary[String, float] = {}, _color_changer: Callable = func(val: Color) -> Color: return val, _starting_color: Color = Color()) -> void:
@@ -9,6 +19,7 @@ func _init(vals: Dictionary[String, float] = {}, _color_changer: Callable = func
 	color_changer = _color_changer
 	starting_color = _starting_color
 
+## Returns an array of entries with the generated colors.
 func to_array() -> Array[PieChartEntry]:
 	if (color_changer.call(starting_color) is not Color):
 		push_error("Color Changer does NOT return a color!")
@@ -26,6 +37,7 @@ func to_array() -> Array[PieChartEntry]:
 		color_generated = color_changer.call(color_generated) as Color
 	return res
 
+## Returns a dictionary of entries for strings given the text formatting for each label.
 func with_formatting(formatting: Array[String]) -> Dictionary[PieChartEntry, String]:
 	if (color_changer.call(starting_color) is not Color):
 		push_error("Color Changer does NOT return a color!")
