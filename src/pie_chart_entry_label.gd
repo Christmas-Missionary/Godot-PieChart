@@ -64,19 +64,19 @@ signal property_changed
 		property_changed.emit()
 
 @export_group("Separation", "separation_")
-## Is whether or not the label should have a seperator at its end.
+## Is whether or not the label should have a separator at its end.
 @export var separation_show: bool = false:
 	set(val):
 		separation_show = val
 		property_changed.emit()
 
-## What color the seperator should be if on.
+## What color the separator should be if on.
 @export var separation_color: Color = Color.WHITE:
 	set(val):
 		separation_color = val
 		property_changed.emit()
 
-## How thick the seperator should be if on.
+## How thick the separator should be if on.
 @export_range(0, 1000) var separation_thickness: float = 3.0:
 	set(val):
 		separation_thickness = val
