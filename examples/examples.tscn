@@ -311,10 +311,12 @@ script = ExtResource("1_blwj6")
 metadata/_custom_type_script = "uid://biulhvvte3dvh"
 
 [node name="Title" type="RichTextLabel" parent="Kiribati"]
+modulate = Color(0.5, 0.5, 0.5, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-text = "House of
+bbcode_enabled = true
+text = "[wave amp=10]House of
 Assembly
 in Kiribati
 December
@@ -324,12 +326,14 @@ circle_radius = 80.0
 metadata/_custom_type_script = "uid://dg1804s2dc2k1"
 
 [node name="1" type="RichTextLabel" parent="Kiribati"]
+modulate = Color(1, 0, 0, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+bbcode_enabled = true
 script = ExtResource("2_48n3t")
 entry = SubResource("Resource_okxuy")
-text_format = "%n
+text_format = "[tornado]%n
 %w members"
 display_weight_as_integer = true
 separation_show = true
@@ -337,12 +341,14 @@ separation_color = Color(0.9, 0, 0, 1)
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="2" type="RichTextLabel" parent="Kiribati"]
+modulate = Color(0, 0, 1, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+bbcode_enabled = true
 script = ExtResource("2_48n3t")
 entry = SubResource("Resource_235p2")
-text_format = "%n
+text_format = "[shake]%n
 %w members"
 display_weight_as_integer = true
 separation_show = true
@@ -353,10 +359,11 @@ metadata/_custom_type_script = "uid://w8g4uchaio4c"
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+bbcode_enabled = true
 script = ExtResource("2_48n3t")
 entry = SubResource("Resource_nqdee")
-text_format = "%n
-%w members"
+text_format = "[pulse]%n
+%wmembers"
 display_weight_as_integer = true
 separation_show = true
 separation_color = Color(0.4, 0.4, 0.4, 1)
