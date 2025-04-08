@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt5dvemopnqpy"]
+
+[ext_resource type="Script" uid="uid://ckidlcwskg3he" path="res://tests/pin_wheel_film/pin_wheel.gd" id="1_64q4m"]
+
+[node name="ColorRect" type="ColorRect"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="PinWheel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_64q4m")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+zoom = Vector2(2.2, 2.2)
