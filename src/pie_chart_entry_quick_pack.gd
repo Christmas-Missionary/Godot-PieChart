@@ -8,13 +8,36 @@ class_name PieChartEntryQuickPack extends Resource
 @export var values: Dictionary[String, float] = {}
 
 ## The function that changes the color for the next entry.[br][br]
-## [b]Note:[/b] It is not recommended for this to change global state, but it can depend on global state if needed.
+## [b]Note:[/b] It is not recommended for this to change global state, but it can depend on global state if needed.[br][br]
+## Below are a few examples of how colors could be generated.
+## [codeblock]
+## var start: Color = Color(randf(), randf(), randf())
+## var rand_lerp: Callable = func(val: Color) -> Color:
+##    return val.lerp(Color(randf(), randf(), randf()), randf())
+## [/codeblock]
+## [codeblock]
+## var start: Color = Color.RED
+## var rainbow: Callable = func(val: Color) -> Color:
+##    val.h += 0.06
+##    return val
+## [/codeblock]
+## [codeblock]
+## var start: Color = Color(0, 0.5, 0.5)
+## var cherry_blossom: Callable = func(val: Color) -> Color:
+##    return Color(fmod(val.r + 0.03, 1), fmod(val.g - 0.07, 1), fmod(val.b + 0.02, 1))
+## [/codeblock]
 @export var color_changer: Callable = Callable()
 
 ## The color that will be in the first element of the array.
 @export var starting_color: Color = Color.BLACK
 
 func _init(vals: Dictionary[String, float] = {}, _color_changer: Callable = func(val: Color) -> Color: return val, _starting_color: Color = Color()) -> void:
+	var cherry_blossom: Callable = func(val: Color) -> Color:
+		return Color(fmod(val.r + 0.03, 1), fmod(val.g - 0.07, 1), fmod(val.b + 0.02, 1))
+	Color(0, 0.5, 0.5)
+	var rainbow: Callable = func(val: Color) -> Color:
+		val.h += 0.06
+		return val
 	values = vals
 	color_changer = _color_changer
 	starting_color = _starting_color
