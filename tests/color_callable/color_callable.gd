@@ -1,5 +1,12 @@
 extends Control
 
+"""
+Tests:
+	Loads of entries
+	PieChartEntryQuickPack
+	init PieChart and PieChartEntryLabels
+"""
+
 var _pie_chart: PieChart
 
 func _on_button_pressed() -> void:

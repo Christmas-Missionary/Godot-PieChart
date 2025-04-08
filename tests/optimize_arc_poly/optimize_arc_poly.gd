@@ -1,5 +1,11 @@
 extends Control
 
+"""
+Tests:
+	Find the best function to generate an array of Vector2s representing a slice
+	Given 1280 points, executed 50,000 times.
+"""
+
 ## Original (Except for nb_points and return value)
 func fori(center, radius, angle_from, angle_to, _color, nb_points):
 	var points_arc = PackedVector2Array()
@@ -125,3 +131,4 @@ func _ready() -> void:
 			fun.call()
 		time = Time.get_ticks_usec() - time
 		print("Function " , fun.get_method(), " took ", time, " microseconds.")
+	get_tree().quit()

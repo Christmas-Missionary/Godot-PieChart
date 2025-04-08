@@ -1,5 +1,11 @@
 extends PieChart
 
+"""
+Tests:
+	PieChart and its own properties
+	Use of theme
+"""
+
 @export var _rot: float = 0.02
 
 func _ready() -> void:

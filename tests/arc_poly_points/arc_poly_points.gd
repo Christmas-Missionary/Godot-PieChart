@@ -1,4 +1,10 @@
 extends Control
+
+"""
+Tests:
+	Minimun number of points along edge to get indistinguishable shape to `_draw_circle`
+"""
+
 const _POS: Vector2i = Vector2i(305, 305)
 const _RADIUS: int = 300
 

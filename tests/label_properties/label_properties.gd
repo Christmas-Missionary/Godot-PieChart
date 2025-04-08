@@ -1,5 +1,11 @@
 extends Control
 
+"""
+Tests:
+	PieChartEntryLabel
+	All of its properties
+"""
+
 func _ready() -> void:
 	var entries: PieChartEntryQuickPack = PieChartEntryQuickPack.new(
 		{"One" : 1.0, "Two" : 1.0, "Three" : 1.0}, 
