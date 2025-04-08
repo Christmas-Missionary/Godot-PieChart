@@ -1,0 +1,5 @@
+"""
+Tests:
+	PieChartTitleLabel
+	All of its properties
+"""
