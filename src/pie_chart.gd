@@ -24,7 +24,7 @@ class_name PieChart extends Control
 ##    PieChart.new()
 ##            .with_parent_as(self)
 ##            .with_labels(entries_with_formatting, true)
-##            .set_position_and_size(Vector2(100, 50), Vector2(600, 600))
+##            .set_position_and_size(Vector2(100.0, 50.0), Vector2(600.0, 600.0))
 ##)
 ## [/codeblock]
 
@@ -46,7 +46,7 @@ class_name PieChart extends Control
 ## extends Node2D # or any CanvasItem
 ##
 ## func _draw() -> void:
-##    draw_colored_polygon(PieChart.circle_arc_poly(Vector2(200, 100), 200.0, 0, TAU / 4, 16), Color.WHITE)
+##    draw_colored_polygon(PieChart.circle_arc_poly(Vector2(200.0, 100.0), 200.0, 0.0, TAU / 4.0, 16), Color.WHITE)
 ## [/codeblock]
 ## [b]Tip:[/b] To be basically indistinguishable with [method CanvasItem.draw_circle], you will need at least 64 points along the arc.
 static func circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, number_of_points: int) -> PackedVector2Array:
@@ -83,22 +83,15 @@ func set_entry_labels(entries_with_format: Dictionary[PieChartEntry, String]) ->
 	for i: int in entries_with_format.size():
 		var _discard: PieChartEntryLabel = labels[i].set_entry_and_format(entries[i], formatting[i])
 
-## Returns the current radius of the pie chart, which is [code](minf(size.x, size.y) / 4) * chart_radius_multiplier[/code].
+## Returns the current radius of the pie chart, which is [code](minf(size.x, size.y) / 4.0) * chart_radius_multiplier[/code].
 func get_chart_radius() -> float:
 	return (minf(size.x, size.y) / 4) * chart_radius_multiplier
 
 ## Used to pipeline instantiating a PieChart and adding it as a child.
 func with_parent_as(node: Node) -> PieChart:
+	assert(node != null, "Node to be parent is null!")
 	node.add_child(self)
 	return self
-
-func _weight_sum(arr: Array[PieChartEntryLabel]) -> float:
-	var res: float = 0
-	for node: PieChartEntryLabel in arr:
-		res += (0.0 if !node.entry or node.entry.weight <= 0.0 else node.entry.weight)
-	if is_zero_approx(res):
-		push_error("All the entries total zero!")
-	return res
 
 ## Returns an array of all [PieChartEntryLabel] children.
 func get_entry_labels() -> Array[PieChartEntryLabel]:
@@ -117,9 +110,27 @@ func get_title_label() -> PieChartTitleLabel:
 
 ## Sets the position and size, then returns itself.
 func set_position_and_size(pos: Vector2, size_: Vector2) -> PieChart:
+	if is_nan(pos.x) or is_nan(pos.y):
+		push_error("Position to set on node %s contains a NAN value!" % str(self))
+	if is_inf(pos.x) or is_inf(pos.y):
+		push_error("Position to set on node %s contains an INF value!" % str(self))
+	if is_nan(size_.x) or is_nan(size_.y):
+		push_error("Size to set on node %s contains a NAN value!" % str(self))
+	if is_inf(size_.x) or is_inf(size_.y):
+		push_error("Size to set on node %s contains an INF value!" % str(self))
 	position = pos
 	size = size_
 	return self
+
+func _weight_sum(arr: Array[PieChartEntryLabel]) -> float:
+	var res: float = 0
+	for node: PieChartEntryLabel in arr:
+		assert(!is_nan(node.entry.weight), "Value of weight in node %s is NAN!" % str(node))
+		assert(!is_inf(node.entry.weight), "Value of weight in node %s is infinite!" % str(node))
+		res += (0.0 if !node.entry or node.entry.weight <= 0.0 else node.entry.weight)
+	if is_zero_approx(res):
+		push_error("All the entries total zero!")
+	return res
 
 func _draw() -> void:
 	var label_nodes: Array[PieChartEntryLabel] = get_entry_labels().filter(func(label: PieChartEntryLabel) -> bool: return !label.disabled) as Array[PieChartEntryLabel]
@@ -134,9 +145,10 @@ func _draw() -> void:
 		if label.disabled or !label.entry or label.entry.weight <= 0:
 			continue
 		var percentage: float = label.entry.weight / hundredth_of_total
-		var rads_from_begin_angle: float = percentage * 0.0628318530717959 # TAU / 100.0 = 0.0628318530717959
+		var rads_from_begin_angle: float = percentage * (TAU / 100)
 		draw_colored_polygon(circle_arc_poly(center, radius, begin_rads, begin_rads + rads_from_begin_angle, ceili(0.64 * percentage)), label.entry.color) # 64 / 100.0 = 0.64
 		var label_angle_point: Vector2 = Vector2.from_angle(rads_from_begin_angle + begin_rads - (rads_from_begin_angle / 2)) * radius
+		@warning_ignore("return_value_discarded")
 		label.set_to_display(percentage, label_angle_point * (0.5 if label.is_in_slice else 1.6) + center)
 		if label.text != "" and !label.is_in_slice:
 			draw_line((label_angle_point * 1.05) + center, (label_angle_point * 1.2) + center, Color.WHITE, 2, true)

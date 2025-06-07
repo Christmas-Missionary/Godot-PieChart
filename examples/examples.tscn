@@ -178,6 +178,7 @@ script = ExtResource("2_48n3t")
 entry = SubResource("Resource_mmydx")
 text_format = "%n
 %p%w"
+display_weight_as_integer = true
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="3" type="RichTextLabel" parent="FavoritePet"]
@@ -188,6 +189,7 @@ script = ExtResource("2_48n3t")
 entry = SubResource("Resource_nun71")
 text_format = "%n
 %p%w"
+display_weight_as_integer = true
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="4" type="RichTextLabel" parent="FavoritePet"]
@@ -198,6 +200,7 @@ script = ExtResource("2_48n3t")
 entry = SubResource("Resource_w5fkn")
 text_format = "%n
 %p%w"
+display_weight_as_integer = true
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="5" type="RichTextLabel" parent="FavoritePet"]
@@ -208,6 +211,7 @@ script = ExtResource("2_48n3t")
 entry = SubResource("Resource_eamrx")
 text_format = "%n
 %p%w"
+display_weight_as_integer = true
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="6" type="RichTextLabel" parent="FavoritePet"]
@@ -218,6 +222,7 @@ script = ExtResource("2_48n3t")
 entry = SubResource("Resource_eaoql")
 text_format = "%n
 %p%w"
+display_weight_as_integer = true
 metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="PhoneMarketshare" type="Control" parent="."]

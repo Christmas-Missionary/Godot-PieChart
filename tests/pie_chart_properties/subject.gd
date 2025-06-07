@@ -11,6 +11,7 @@ Tests:
 func _ready() -> void:
 	push_error("Note: When overriding `_ready` for PieChart, PieChartEntryLabel, and PieChartTitleLabel, call `super()` first!!")
 	push_error("Note: This applies to `_draw` in PieChart as well!!")
+	push_error("You can safely ignore these 3 errors!")
 
 func _change_factor(value: float) -> void:
 	chart_radius_multiplier = value
