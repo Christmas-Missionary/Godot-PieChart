@@ -10,8 +10,6 @@ class_name PieChartTitleLabel extends RichTextLabel
 ##    # All other stuff
 ## [/codeblock]
 
-var _drawer: Node2D = Node2D.new()
-
 @export_group("Circle", "circle_")
 ## The color of the circle drawn for the title.
 @export var circle_color: Color = Color.BLACK:
@@ -36,6 +34,8 @@ func set_label(text_: String, color: Color, radius: float) -> void:
 	text = text_
 	circle_color = color
 	circle_radius = radius
+
+var _drawer: Node2D = Node2D.new()
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS

@@ -31,17 +31,6 @@ class_name PieChartEntryQuickPack extends Resource
 ## The color that will be in the first element of the array.
 @export var starting_color: Color = Color.BLACK
 
-func _init(vals: Dictionary[String, float] = {}, _color_changer: Callable = func(val: Color) -> Color: return val, _starting_color: Color = Color()) -> void:
-	var cherry_blossom: Callable = func(val: Color) -> Color:
-		return Color(fmod(val.r + 0.03, 1), fmod(val.g - 0.07, 1), fmod(val.b + 0.02, 1))
-	Color(0, 0.5, 0.5)
-	var rainbow: Callable = func(val: Color) -> Color:
-		val.h += 0.06
-		return val
-	values = vals
-	color_changer = _color_changer
-	starting_color = _starting_color
-
 ## Returns an array of entries with the generated colors.
 func to_array() -> Array[PieChartEntry]:
 	if (color_changer.call(starting_color) is not Color):
@@ -76,3 +65,8 @@ func with_formatting(formatting: Array[String]) -> Dictionary[PieChartEntry, Str
 		@warning_ignore("unsafe_cast")
 		color_generated = color_changer.call(color_generated) as Color
 	return res
+
+func _init(vals: Dictionary[String, float] = {}, _color_changer: Callable = func(val: Color) -> Color: return val, _starting_color: Color = Color()) -> void:
+	values = vals
+	color_changer = _color_changer
+	starting_color = _starting_color

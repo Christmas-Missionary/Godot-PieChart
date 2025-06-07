@@ -6,8 +6,11 @@ class_name PieChartEntry extends Resource
 ## Used as the name of an entry.
 @export var name: String = ""
 ## Does [b]not have to be[/b] a percentage from 0 to 100, as the [PieChart] calculates that with all [PieChartEntryLabel] nodes with an entry.
-## However, the weight must be a positive value above zero.
-@export_range(0, 2 ** 64) var weight: float = 1.0
+## However, the weight must be a positive value at least zero.
+@export_range(0, 2 ** 64) var weight: float = 1.0:
+	set(val):
+		assert(weight >= 0.0, "The `weight` from a PieChartEntry is supposed to be at least zero!")
+		weight = val
 ## Used as the Color drawn and displayed on the parent [PieChart].
 @export var color: Color = Color.BLACK
 
@@ -30,7 +33,7 @@ class_name PieChartEntry extends Resource
 ## (
 ##    PieChart.new()
 ##            .with_parent_as(self)
-##            .set_position_and_size(Vector2(100, 50), Vector2(600, 600))
+##            .set_position_and_size(Vector2(100.0, 50.0), Vector2(600.0, 600.0))
 ##            .with_labels(PieChartEntry.with_formatting(entries, formatting))
 ## )
 ## [/codeblock]
@@ -43,7 +46,6 @@ static func with_formatting(entries: Array[PieChartEntry], formatting: Array[Str
 	return res
 
 func _init(name_: String = "", weight_: float = 1.0, color_: Color = Color.BLACK) -> void:
-	assert(signf(weight_) != -1, "The `weight` from a PieChartEntry is NOT supposed to be negative!")
 	name = name_
 	weight = weight_
 	color = color_
