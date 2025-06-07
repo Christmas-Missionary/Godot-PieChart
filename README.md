@@ -2,7 +2,10 @@
 
 A 2D customizable pie chart implementation for Godot Engine 4.4.
 
-![Pie Chart Demo](https://raw.githubusercontent.com/Christmas-Missionary/Godot-PieChart/refs/heads/main/tests/pin_wheel_film/pinwheel.gif)
+![Pinwheel](./readme_assets/pinwheel.gif)  
+![Timelapse](./readme_assets/timelapse.gif)  
+![Picture 1](./readme_assets/1.jpg)  
+![Picture 2](./readme_assets/2.jpg)  
 
 # How to use
 
