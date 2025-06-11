@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://blqaqmpifpy3h"]
+
+[ext_resource type="Script" uid="uid://c73ckmf2clra1" path="res://tests/subject.gd" id="1_6kwwq"]
+
+[node name="LabellessPieChartProperties" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Subject" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_6kwwq")
+metadata/_custom_type_script = "uid://cjjf0cle40484"
+
+[node name="Timer" type="Timer" parent="Subject"]
+process_callback = 0
+autostart = true
+
+[connection signal="ready" from="Subject" to="Subject" method="_on_timer_timeout"]
+[connection signal="timeout" from="Subject/Timer" to="Subject" method="_on_timer_timeout"]

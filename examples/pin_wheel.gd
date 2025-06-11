@@ -1,18 +1,16 @@
-extends PieChart
+extends LabellessPieChart
 
 func _ready() -> void:
-	var entries: Array[PieChartEntry] = [
-		PieChartEntry.new("", 1, Color.RED),
-		PieChartEntry.new("", 1, Color.ORANGE),
-		PieChartEntry.new("", 1, Color.YELLOW),
-		PieChartEntry.new("", 1, Color.GREEN),
-		PieChartEntry.new("", 1, Color.BLUE),
-		PieChartEntry.new("", 1, Color.VIOLET),
-		PieChartEntry.new("", 1, Color.BROWN),
-		PieChartEntry.new("", 1, Color.GRAY)
+	all_entries = [
+		LabellessPieChartEntry.new(1, Color.RED),
+		LabellessPieChartEntry.new(1, Color.ORANGE),
+		LabellessPieChartEntry.new(1, Color.YELLOW),
+		LabellessPieChartEntry.new(1, Color.GREEN),
+		LabellessPieChartEntry.new(1, Color.BLUE),
+		LabellessPieChartEntry.new(1, Color.VIOLET),
+		LabellessPieChartEntry.new(1, Color.BROWN),
+		LabellessPieChartEntry.new(1, Color.GRAY),
 	]
-	for entry: PieChartEntry in entries:
-		add_child(PieChartEntryLabel.new().set_entry_and_format(entry, ""))
 
 func _physics_process(_delta: float) -> void:
 	starting_offset_radians += 0.025

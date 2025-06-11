@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dfbqgik8fs5dq"]
+[gd_scene load_steps=27 format=3 uid="uid://dfbqgik8fs5dq"]
 
 [ext_resource type="Script" uid="uid://biulhvvte3dvh" path="res://src/pie_chart.gd" id="1_blwj6"]
 [ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/pie_chart_entry_label.gd" id="2_48n3t"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://opl3a0abotfd" path="res://examples/demographics.gd" id="6_ncpv8"]
 [ext_resource type="Script" uid="uid://dbuuearuhusmo" path="res://examples/filler.gd" id="6_ylda1"]
 [ext_resource type="Script" uid="uid://cyt3gtap7cvrv" path="res://examples/title_enlarger.gd" id="8_mmydx"]
+[ext_resource type="Script" uid="uid://cjjf0cle40484" path="res://src/labelless_pie_chart.gd" id="9_w5fkn"]
 
 [sub_resource type="Resource" id="Resource_mmydx"]
 script = ExtResource("3_cwrmx")
@@ -111,27 +112,6 @@ script = ExtResource("3_cwrmx")
 name = "Independents"
 weight = 4.0
 color = Color(0.5, 0.5, 0.5, 1)
-metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
-
-[sub_resource type="Resource" id="Resource_iw1rp"]
-script = ExtResource("3_cwrmx")
-name = ""
-weight = 0.0
-color = Color(0, 0, 0, 1)
-metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
-
-[sub_resource type="Resource" id="Resource_erlsc"]
-script = ExtResource("3_cwrmx")
-name = ""
-weight = 0.0
-color = Color(0, 0, 0, 1)
-metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
-
-[sub_resource type="Resource" id="Resource_otmld"]
-script = ExtResource("3_cwrmx")
-name = ""
-weight = 1.0
-color = Color(1, 0, 0, 1)
 metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
 
 [node name="Examples" type="ColorRect"]
@@ -381,7 +361,7 @@ offset_top = 600.0
 offset_right = 1200.0
 offset_bottom = 1200.0
 script = ExtResource("5_vc52x")
-metadata/_custom_type_script = "uid://biulhvvte3dvh"
+metadata/_custom_type_script = "uid://cjjf0cle40484"
 
 [node name="Marketshare" type="Control" parent="."]
 layout_mode = 3
@@ -403,23 +383,7 @@ offset_left = 1800.0
 offset_right = 2400.0
 offset_bottom = 600.0
 script = ExtResource("6_ylda1")
-metadata/_custom_type_script = "uid://biulhvvte3dvh"
-
-[node name="1" type="RichTextLabel" parent="Filler"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_48n3t")
-entry = SubResource("Resource_iw1rp")
-metadata/_custom_type_script = "uid://w8g4uchaio4c"
-
-[node name="2" type="RichTextLabel" parent="Filler"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_48n3t")
-entry = SubResource("Resource_erlsc")
-metadata/_custom_type_script = "uid://w8g4uchaio4c"
+metadata/_custom_type_script = "uid://cjjf0cle40484"
 
 [node name="RadiiChanger" type="Control" parent="."]
 anchors_preset = 0
@@ -428,8 +392,8 @@ offset_top = 600.0
 offset_right = 2400.0
 offset_bottom = 1200.0
 mouse_filter = 2
-script = ExtResource("1_blwj6")
-metadata/_custom_type_script = "uid://biulhvvte3dvh"
+script = ExtResource("9_w5fkn")
+metadata/_custom_type_script = "uid://cjjf0cle40484"
 
 [node name="Title" type="RichTextLabel" parent="RadiiChanger"]
 layout_mode = 0
@@ -438,14 +402,6 @@ offset_bottom = 40.0
 script = ExtResource("8_mmydx")
 circle_color = Color(0, 1, 0, 1)
 metadata/_custom_type_script = "uid://dg1804s2dc2k1"
-
-[node name="1" type="RichTextLabel" parent="RadiiChanger"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_48n3t")
-entry = SubResource("Resource_otmld")
-metadata/_custom_type_script = "uid://w8g4uchaio4c"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
