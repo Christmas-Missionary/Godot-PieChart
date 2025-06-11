@@ -6,7 +6,7 @@ class_name PieChartEntry extends Resource
 ## Used as the name of an entry.
 @export var name: String = ""
 ## Does [b]not have to be[/b] a percentage from 0 to 100, as the [PieChart] calculates that with all [PieChartEntryLabel] nodes with an entry.
-## However, the weight must be a positive value at least zero.
+## However, the weight must be a positive value (at least zero).
 @export_range(0, 2 ** 64) var weight: float = 1.0:
 	set(val):
 		assert(weight >= 0.0, "The `weight` from a PieChartEntry is supposed to be at least zero!")
