@@ -32,5 +32,5 @@ func _on_timer_timeout() -> void:
 	_set_stuff()
 
 func _set_stuff() -> void:
-	with_labels(PieChartEntry.with_formatting(_all_entries[_chart_index].array_of_entries, _formatting), true)
+	var __: PieChart = with_labels(PieChartEntry.with_formatting(_all_entries[_chart_index].array_of_entries, _formatting), true)
 	get_title_label().set_label("(Fictional)\nDesktop\nMarketshare\nYear: %d" % (_STARTING_YEAR + _chart_index), Color.BLACK, 58)

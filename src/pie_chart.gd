@@ -124,6 +124,9 @@ func set_position_and_size(pos: Vector2, size_: Vector2) -> PieChart:
 
 func _weight_sum(arr: Array[PieChartEntryLabel]) -> float:
 	var res: float = 0
+	if arr == null:
+		push_error("There are no entry labels!")
+		return 0.0
 	for node: PieChartEntryLabel in arr:
 		assert(!is_nan(node.entry.weight), "Value of weight in node %s is NAN!" % str(node))
 		assert(!is_inf(node.entry.weight), "Value of weight in node %s is infinite!" % str(node))
