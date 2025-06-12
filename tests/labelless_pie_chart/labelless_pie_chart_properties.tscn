@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://blqaqmpifpy3h"]
 
-[ext_resource type="Script" uid="uid://c73ckmf2clra1" path="res://tests/subject.gd" id="1_6kwwq"]
+[ext_resource type="Script" uid="uid://c73ckmf2clra1" path="res://tests/labelless_pie_chart/subject.gd" id="1_6kwwq"]
 
 [node name="LabellessPieChartProperties" type="Control"]
 layout_mode = 3
