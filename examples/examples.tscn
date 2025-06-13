@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dfbqgik8fs5dq"]
+[gd_scene load_steps=37 format=3 uid="uid://dfbqgik8fs5dq"]
 
 [ext_resource type="Script" uid="uid://biulhvvte3dvh" path="res://src/pie_chart.gd" id="1_blwj6"]
 [ext_resource type="Script" uid="uid://w8g4uchaio4c" path="res://src/pie_chart_entry_label.gd" id="2_48n3t"]
@@ -10,7 +10,12 @@
 [ext_resource type="Script" uid="uid://opl3a0abotfd" path="res://examples/demographics.gd" id="6_ncpv8"]
 [ext_resource type="Script" uid="uid://dbuuearuhusmo" path="res://examples/filler.gd" id="6_ylda1"]
 [ext_resource type="Script" uid="uid://cyt3gtap7cvrv" path="res://examples/title_enlarger.gd" id="8_mmydx"]
+[ext_resource type="Script" uid="uid://c8ubpubkhhuyo" path="res://examples/political_chart.gd" id="9_eamrx"]
 [ext_resource type="Script" uid="uid://cjjf0cle40484" path="res://src/labelless_pie_chart.gd" id="9_w5fkn"]
+[ext_resource type="Script" uid="uid://bokflhgiarwf5" path="res://examples/night_sky_chart.gd" id="10_eaoql"]
+[ext_resource type="Script" uid="uid://c87oocpyof7y8" path="res://examples/moving_chart.gd" id="13_okxuy"]
+[ext_resource type="Script" uid="uid://uy0vly7lpbrv" path="res://examples/pacman.gd" id="15_235p2"]
+[ext_resource type="Script" uid="uid://cmcu8qusfehor" path="res://src/labelless_pie_chart_entry.gd" id="16_nqdee"]
 
 [sub_resource type="Resource" id="Resource_mmydx"]
 script = ExtResource("3_cwrmx")
@@ -114,9 +119,46 @@ weight = 4.0
 color = Color(0.5, 0.5, 0.5, 1)
 metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
 
+[sub_resource type="Resource" id="Resource_iw1rp"]
+script = ExtResource("3_cwrmx")
+name = ""
+weight = 1.0
+color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_erlsc"]
+script = ExtResource("3_cwrmx")
+name = ""
+weight = 1.0
+color = Color(0, 0, 1, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_otmld"]
+script = ExtResource("3_cwrmx")
+name = ""
+weight = 1.0
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce13kc3ly1b1y"
+
+[sub_resource type="Resource" id="Resource_iwvm1"]
+script = ExtResource("16_nqdee")
+weight = 3.0
+color = Color(1, 1, 0, 1)
+separation_thickness = 0.0
+separation_color = Color(1, 1, 1, 1)
+metadata/_custom_type_script = "uid://cmcu8qusfehor"
+
+[sub_resource type="Resource" id="Resource_6tpmn"]
+script = ExtResource("16_nqdee")
+weight = 1.0
+color = Color(0, 0, 0, 1)
+separation_thickness = 0.0
+separation_color = Color(1, 1, 1, 1)
+metadata/_custom_type_script = "uid://cmcu8qusfehor"
+
 [node name="Examples" type="ColorRect"]
 offset_right = 2400.0
-offset_bottom = 1200.0
+offset_bottom = 1800.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
@@ -385,6 +427,35 @@ offset_bottom = 600.0
 script = ExtResource("6_ylda1")
 metadata/_custom_type_script = "uid://cjjf0cle40484"
 
+[node name="PoliticalChart" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 1200.0
+offset_right = 600.0
+offset_bottom = 1800.0
+script = ExtResource("9_eamrx")
+metadata/_custom_type_script = "uid://cjjf0cle40484"
+
+[node name="Timer" type="Timer" parent="PoliticalChart"]
+process_callback = 0
+autostart = true
+
+[node name="NightSkyChart" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 600.0
+offset_top = 1200.0
+offset_right = 1200.0
+offset_bottom = 1800.0
+mouse_filter = 1
+script = ExtResource("10_eaoql")
+metadata/_custom_type_script = "uid://cjjf0cle40484"
+
+[node name="Timer" type="Timer" parent="NightSkyChart"]
+process_callback = 0
+wait_time = 5.5
+autostart = true
+
 [node name="RadiiChanger" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 1800.0
@@ -403,10 +474,59 @@ script = ExtResource("8_mmydx")
 circle_color = Color(0, 1, 0, 1)
 metadata/_custom_type_script = "uid://dg1804s2dc2k1"
 
+[node name="MovingChart" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1200.0
+offset_top = 1200.0
+offset_right = 1800.0
+offset_bottom = 1800.0
+script = ExtResource("13_okxuy")
+metadata/_custom_type_script = "uid://biulhvvte3dvh"
+
+[node name="PieChartEntryLabel" type="RichTextLabel" parent="MovingChart"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_iw1rp")
+text_format = "I'm moving!"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="PieChartEntryLabel2" type="RichTextLabel" parent="MovingChart"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_erlsc")
+text_format = "I'm moving!"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
+[node name="PieChartEntryLabel3" type="RichTextLabel" parent="MovingChart"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48n3t")
+entry = SubResource("Resource_otmld")
+text_format = "I'm moving!"
+metadata/_custom_type_script = "uid://w8g4uchaio4c"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
 limit_left = 0
 limit_top = 0
 script = ExtResource("5_hlds0")
 
+[node name="Pacman" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1800.0
+offset_top = 1200.0
+offset_right = 2400.0
+offset_bottom = 1800.0
+script = ExtResource("15_235p2")
+all_entries = Array[ExtResource("16_nqdee")]([SubResource("Resource_iwvm1"), SubResource("Resource_6tpmn")])
+starting_offset_radians = 0.785
+metadata/_custom_type_script = "uid://cjjf0cle40484"
+
 [connection signal="timeout" from="Marketshare/Timer" to="Marketshare" method="_on_timer_timeout"]
+[connection signal="timeout" from="PoliticalChart/Timer" to="PoliticalChart" method="_elapse"]
+[connection signal="timeout" from="NightSkyChart/Timer" to="NightSkyChart" method="_tween_again"]

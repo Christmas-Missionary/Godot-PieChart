@@ -37,8 +37,6 @@ func _weight_sum() -> float:
 		assert(!is_nan(entry.weight), "Value of weight in `all_entries` is NAN!")
 		assert(!is_inf(entry.weight), "Value of weight in `all_entries` is infinite!")
 		res += entry.weight
-	if is_zero_approx(res):
-		push_error("All the entries total zero!")
 	return res
 
 func _draw() -> void:
@@ -55,5 +53,5 @@ func _draw() -> void:
 		if entry.separation_thickness > 0.0:
 			draw_line(center, Vector2.from_angle(begin_rads) * radius + center, entry.separation_color, entry.separation_thickness, true)
 		begin_rads += rads_from_begin_angle
-	#if label_nodes[0].separation_show:
-		#draw_line(center, Vector2.from_angle(starting_offset_radians) * radius + center, label_nodes[0].separation_color, label_nodes[0].separation_thickness, true)
+	if all_entries != null and all_entries.size() and all_entries[0] != null and all_entries[0].separation_thickness > 0.0:
+		draw_line(center, Vector2.from_angle(starting_offset_radians) * radius + center, all_entries[0].separation_color, all_entries[0].separation_thickness, true)
