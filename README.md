@@ -2,10 +2,10 @@
 
 A 2D customizable pie chart implementation for Godot Engine 4.4.
 
-![Pinwheel](./readme_assets/pinwheel.gif)  
-![Timelapse](./readme_assets/timelapse.gif)  
-![Picture 1](./readme_assets/1.jpg)  
-![Picture 2](./readme_assets/2.jpg)  
+![Pinwheel](./assets/readme/pinwheel.gif)  
+![Timelapse](./assets/readme/timelapse.gif)  
+![Picture 1](./assets/readme/1.jpg)  
+![Picture 2](./assets/readme/2.jpg)  
 
 # How to use
 
@@ -19,12 +19,12 @@ No, I'm **not** going to sue you for not including the License, but to those who
 
 The only requirement specified in the license is to include the text AND show it to the user at some point. This applies to all code in this repo. Though, there are many ways to fulfill the license, I have a template for you to start with.
 
-    extends RichTextLabel
-    func _ready() -> void:
-	    var file: FileAccess = FileAccess.open("res://path_to_license.txt", FileAccess.READ)
-	    var license: String = file.get_as_text()
-	    file.close()
-	    text = license
+	extends RichTextLabel
+	func _ready() -> void:
+		var file: FileAccess = FileAccess.open("res://path_to_license.txt", FileAccess.READ)
+		var license: String = file.get_as_text()
+		file.close()
+		text = license
 
 
 # Why did I make this?
@@ -34,10 +34,10 @@ The only requirement specified in the license is to include the text AND show it
 
 # Todo/Ideas
 
-1. LabellessPieChart, all entries are Dictionary[Color, float], no PieChartEntryLabels needed
-2. PieChartLegend node
-3. Node icons
-4. project icon and boot splash?
+1. Boot Splash
+2. Project Icon
+3. PieChartLegend node
+4. Node icons?
 
 # FAQ
 
