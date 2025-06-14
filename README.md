@@ -34,10 +34,8 @@ The only requirement specified in the license is to include the text AND show it
 
 # Todo/Ideas
 
-1. Boot Splash
-2. Project Icon
-3. PieChartLegend node
-4. Node icons?
+1. PieChartLegend node
+2. Node icons?
 
 # FAQ
 
