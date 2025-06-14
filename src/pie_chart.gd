@@ -7,10 +7,18 @@ class_name PieChart extends Control
 ## See [method get_entry_labels], [method set_entry_labels], and [method get_title_label].[br][br]
 ## [b]Note:[/b] It must need at least one [PieChartEntryLabel] child in order to render.[br][br]
 ## This class uses [method CanvasItem._draw] to draw the slices on the pie chart.
-## This means that any manipulation of [member chart_radius_multiplier] and [member starting_offset_radians] results in [method queue_redraw] being called.[br][br]
+## This means that any manipulation of the exclusive properties to the [PieChartEntryLabel] child nodes, [member chart_radius_multiplier], and [member starting_offset_radians] results in [method queue_redraw] being called.[br][br]
+##
+## However, if the node doesn't seem to be changing, but the values inside [member all_entries] are in fact changing (via a [Tween], for example), use this:
+## [codeblock]
+## extends Control
+##
+## func _physics_process(_delta: float) -> void:
+##     queue_redraw()
+## [/codeblock]
 ##
 ## Though you can build a [PieChart] in the editor, you can instantiate one with just a few lines of code.
-## The codeblock below shows an example of this.[br]
+## The codeblock below shows an example of this:[br]
 ##
 ## [codeblock]
 ## extends Control

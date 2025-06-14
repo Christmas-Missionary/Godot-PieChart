@@ -1,4 +1,6 @@
 extends Node2D
+## Due to the nature of its text being behind this node's drawing,
+## a different node must be used with [member CanvasItem.show_behind_parent] as [code]true[/code] to draw the circle.
 
 func _draw() -> void:
 	var parent: PieChartTitleLabel = get_parent() as PieChartTitleLabel
