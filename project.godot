@@ -13,7 +13,8 @@ config_version=5
 config/name="Pie and a Fork"
 run/main_scene="uid://dfbqgik8fs5dq"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="uid://btp1fjg823h4o"
+config/icon="uid://cnqjklhcilw4c"
 
 [debug]
 
