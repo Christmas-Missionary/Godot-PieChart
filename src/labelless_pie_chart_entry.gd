@@ -1,4 +1,7 @@
 class_name LabellessPieChartEntry extends Resource
+## Resource for a unit of data on a labelless pie chart.
+##
+## This is used to store a singular entry, and can be represented as a slice if in an [code]Array[LabellessPieChartEntry][/code] via [member LabellessPieChart.all_entries]
 
 ## Does [b]not have to be[/b] a percentage from 0 to 100, as the [LabellessPieChart] calculates that with all [LabellessPieChartEntry] elements in the all_entries array.
 ## However, the weight must be a positive value (at least zero).

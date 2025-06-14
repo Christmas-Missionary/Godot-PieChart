@@ -1,6 +1,34 @@
-extends Control
-class_name LabellessPieChart
+class_name LabellessPieChart extends Control
+## A control that provides pie chart and doughnut chart functionality [b]without[/b] any labels, usually for designs as opposed to proper pie charts.
+##
+## This is a singular node that takes in an [code]Array[LabellessPieChartEntry][/code] as [member all_entries] and draws its proportions.
+## [b]It is fully dependent on the size you give it to draw the labelless pie chart.[/b][br][br]
+## [b]Note:[/b] It must need at least one valid [LabellessPieChartEntry] in [member all_entries] in order to render.[br][br]
+## This class uses [method CanvasItem._draw] to draw the slices on the pie chart.
+## This means that any manipulation of [member all_entries] [member chart_radius_multiplier] and [member starting_offset_radians] results in [method queue_redraw] being called.[br][br]
+## However, if the node doesn't seem to be changing, but the values inside [member all_entries] are in fact changing (via a [Tween], for example), use this:
+## [codeblock]
+## extends Control
+##
+## func _physics_process(_delta: float) -> void:
+##     queue_redraw()
+## [/codeblock]
+##
+## Though you can build a [LabellessPieChart] in the editor, you can instantiate one with just a few lines of code.
+## The codeblock below shows an example of this:[br]
+##
+## [codeblock]
+## extends Control
+##
+## @onready var _chart: LabellessPieChart = (
+##    LabellessPieChart.new()
+##            .with_parent_as(self)
+##            .with_entries([LabellessPieChartEntry.new(3.0, Color.RED), LabellessPieChartEntry.new(2.0, Color.GREEN)])
+##            .set_position_and_size(Vector2(100.0, 50.0), Vector2(600.0, 600.0))
+##)
+## [/codeblock]
 
+## An array of all the entries for a [LabellessPieChart]. 
 @export var all_entries: Array[LabellessPieChartEntry]:
 	set(val):
 		all_entries = val
@@ -25,6 +53,31 @@ class_name LabellessPieChart
 ## Returns the current radius of the pie chart, which is [code](minf(size.x, size.y) / 4.0) * chart_radius_multiplier[/code].
 func get_chart_radius() -> float:
 	return (minf(size.x, size.y) / 4) * chart_radius_multiplier
+
+## Used to pipeline instantiating a LabellessPieChart and adding it as a child.
+func with_parent_as(node: Node) -> LabellessPieChart:
+	assert(node != null, "Node to be parent is null!")
+	node.add_child(self)
+	return self
+
+## A setter for [member all_entries] and returns the node calling the method. Nice for Pipelining.
+func with_entries(entries: Array[LabellessPieChartEntry]) -> LabellessPieChart:
+	all_entries = entries
+	return self
+
+## Sets the position and size, then returns itself.
+func set_position_and_size(pos: Vector2, size_: Vector2) -> LabellessPieChart:
+	if is_nan(pos.x) or is_nan(pos.y):
+		push_error("Position to set on node %s contains a NAN value!" % str(self))
+	if is_inf(pos.x) or is_inf(pos.y):
+		push_error("Position to set on node %s contains an INF value!" % str(self))
+	if is_nan(size_.x) or is_nan(size_.y):
+		push_error("Size to set on node %s contains a NAN value!" % str(self))
+	if is_inf(size_.x) or is_inf(size_.y):
+		push_error("Size to set on node %s contains an INF value!" % str(self))
+	position = pos
+	size = size_
+	return self
 
 func _weight_sum() -> float:
 	if all_entries == null:

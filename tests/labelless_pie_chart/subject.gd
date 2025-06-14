@@ -1,5 +1,11 @@
 extends LabellessPieChart
 
+"""
+Tests:
+	LabellessPieChart
+	All of its properties
+"""
+
 var _rotation_speed: float = 0.0
 
 func _on_timer_timeout() -> void:
