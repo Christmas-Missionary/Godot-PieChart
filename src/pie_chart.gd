@@ -58,6 +58,7 @@ class_name PieChart extends Control
 ## [/codeblock]
 ## [b]Tip:[/b] To be basically indistinguishable with [method CanvasItem.draw_circle], you will need at least 64 points along the arc.
 static func circle_arc_poly(center: Vector2, radius: float, rads_from: float, rads_to: float, number_of_points: int) -> PackedVector2Array:
+	assert(number_of_points > 0, "Number of points to generate points for slice is at most zero!")
 	var previous_vec: Vector2 = Vector2.from_angle(rads_from) * radius
 	var rads_to_rotate: float = (rads_to - rads_from) / number_of_points
 	var res: PackedVector2Array

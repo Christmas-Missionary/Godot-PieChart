@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 """
 Tests:
@@ -114,7 +114,7 @@ func _ready() -> void:
 	and arr_one.size() == arr_four.size() and arr_one.size() == arr_five.size() and
 	arr_one.size() == arr_six.size() and arr_one.size() == arr_seven.size() and arr_one.size() == arr_eight.size(), "Sizes do not match!")
 	for i: int in arr_one.size():
-		#print("Original Array: ", arr_ori[i], " Difference Between 7 and original: ", arr_seven[i] - arr_ori[i])
+		print("Original Array: ", arr_ori[i], " Difference Between 7 and original: ", arr_seven[i] - arr_ori[i])
 		print("Original array: ", arr_ori[i], " Difference Between 1 and original: ", arr_ori[i] - arr_one[i],
 		" 2 and 1: ", arr_two[i] - arr_one[i], " 3 and 2: ", arr_three[i] - arr_two[i], " 4 and 3: ", arr_four[i] - arr_three[i],
 		" 5 and 4: ", arr_five[i] - arr_four[i], " 6 and 5: ", arr_six[i] - arr_five[i], " 7 and 6: ", arr_seven[i] - arr_six[i], 
@@ -131,4 +131,5 @@ func _ready() -> void:
 			fun.call()
 		time = Time.get_ticks_usec() - time
 		print("Function " , fun.get_method(), " took ", time, " microseconds.")
+	await get_tree().create_timer(1.0).timeout
 	get_tree().quit()
