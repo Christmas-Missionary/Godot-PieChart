@@ -15,6 +15,8 @@ The files in `src` are only classes that act like built-in nodes, with no scenes
 
 **The MIT License**
 
+The MIT License (which is at ./LICENSE.txt) applies to all source code unless specified by another README.md with the corresponding license.
+
 No, I'm **not** going to sue you for not including the License, but to those who are serious, read on.
 
 The only requirement specified in the license is to include the text AND show it to the user at some point. This applies to all code in this repo. Though, there are many ways to fulfill the license, I have a template for you to start with.
@@ -29,7 +31,7 @@ The only requirement specified in the license is to include the text AND show it
 
 # Why did I make this?
 
-  I needed a pie chart implementation for a future project. I forked from [this commit](https://github.com/Christmas-Missionary/Godot-PieChart/tree/9439e0bb8d0fecbef0027001ffb9ca1909242872), as it had a good starting point, and I saw some potential to expand upon it.
+I needed a pie chart implementation for a future project (which may or may not come out eventually). I forked from [this commit](https://github.com/Christmas-Missionary/Godot-PieChart/tree/9439e0bb8d0fecbef0027001ffb9ca1909242872), as it had a good starting point, and I saw some potential to expand upon it.
 
 
 # Todo/Ideas
@@ -48,7 +50,7 @@ Yes, by:
 
 **Will you do more work on this project?**
 
-Probably.
+Maybe.
 
 **The documentation for the custom classes doesn't show up. Now what?**
 
