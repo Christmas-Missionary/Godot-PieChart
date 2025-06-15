@@ -1,5 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
+
+# Other
 /android/
 todo
+stuff
 .DS_Store
